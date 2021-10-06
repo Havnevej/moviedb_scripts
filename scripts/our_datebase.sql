@@ -72,7 +72,7 @@ CREATE TABLE public.Genre(
     genre_name character(20)
 );
 
-CREATE TABLE public.title(
+CREATE TABLE public.Title(
     title_id character(20),
     title_type character(20),
     original_title character(20),
