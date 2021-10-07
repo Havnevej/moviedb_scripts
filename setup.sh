@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PGPASSWORD='postgres'
+export PGPASSWORD='Huss0325'
 export PGOPTIONS="-c client_min_messages=error"
 order=('our_datebase.sql' 'add_consraint.sql' 'add_data.sql')
 temp_database_name="imdb"
