@@ -73,3 +73,9 @@ from name_basics;
 
 
 -- Known_for_tiles_key
+
+
+-- character split
+insert into public.character(character,person_id,title_id) 
+select unnest(string_to_array(characters, ','))as character,nconst,tconst 
+from title_principals
