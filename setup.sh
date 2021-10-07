@@ -27,7 +27,7 @@ function setup_databases {
 
 setup_databases
 
-for script in $order; do
+for script in "${order[@]}"; do
     echo -e "${RED}running script: $script ${NC}"
     psql -U postgres -h $server -d "$our_database_name" -q -f "./scripts/$script" 
 done
