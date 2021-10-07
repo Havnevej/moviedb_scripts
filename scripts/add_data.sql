@@ -25,9 +25,6 @@ TRUNCATE "public".Episodes;
 
 INSERT INTO public.Episodes("parent_title_id", "title_ud", "season_nr", "episode_nr")
 SELECT "parenttconst", "tconst", "seasonnumber", "episodenumber"
-<<<<<<< HEAD
-FROM "public".title_episode;
-=======
 FROM "public".title_episode;
 
 -- person 
@@ -44,7 +41,9 @@ SELECT "tconst", "genre_id"
 FROM "public".title, "public".genre
 
 -- profession 
-INSERT INTO profession (profession_type) select distinct trim(unnest(string_to_array(primaryprofession, ','))) from name_basics;
+INSERT INTO profession (profession_type) 
+SELECT DISTINCT trim(unnest(string_to_array(primaryprofession, ','))) 
+FROM name_basics;
 
 
 -- profession key
@@ -60,4 +59,3 @@ from name_basics;
 
 
 -- Known_for_tiles_key
->>>>>>> a898c0332a1f0a3dfeffece531f6f973ebfb193d
