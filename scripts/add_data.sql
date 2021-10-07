@@ -27,13 +27,3 @@ TRUNCATE "public".Title_rating;
 INSERT INTO public.Title("title_id", "rating_avg", "votes")
 SELECT "tconst", "", ""
 FROM "public".title_ratings;
-
-efef
-ef
-ef
-ef
-ef
-ef
-ef
-ef
-efe
