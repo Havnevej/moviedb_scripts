@@ -25,102 +25,101 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.Person (
-    person_id character(10),
-    person_name character varying(256),
-    birthyear character(4),
-    deathyear character(4)
+    person_id varchar(255),
+    person_name varchar(255),
+    birthyear varchar(255),
+    deathyear varchar(255)
 );
 
-CREATE TABLE public.Professon_key(
-    person_id character(10),
-    profession_id character(20)
+CREATE TABLE public.Profession_key(
+    person_id varchar(255),
+    profession_id varchar(255)
 );
 
 CREATE TABLE public.Profession(
-    profession_id character(10),
-    profession_type character(20)
+    profession_id SERIAL,
+    profession_type varchar(255)
 );
 
 CREATE TABLE public.Known_for_titles_key (
-    person_id character (10),
-    k_id character(20)
+    person_id varchar(255),
+    k_id varchar(255)
 );
 
 CREATE TABLE public.Known_for_titles (
-    k_id character(20),
-    title_id character(20)
+    k_id SERIAL,
+    title_id varchar(255)
 );
 
 CREATE TABLE public.Title_versions (
-    title_id character(20),
-    title_version character(16),
-    title_name character(20),
-    region character (20),
-    language character(16),
-    types character(10),
-    attributes character(10),
+    title_id varchar(255),
+    title_version varchar(255),
+    title_name varchar(255),
+    region varchar(255),
+    language varchar(255),
+    types varchar(255),
+    attributes varchar(255),
     is_original_title boolean
 );
 
 CREATE TABLE public.Genre_key(
-    title_id character(20),
-    Genre_id character(20)
+    title_id varchar(255),
+    genre_id varchar(255)
 );
 
 CREATE TABLE public.Genre(
-    Genre_id character(20),
-    genre_name character(20)
+    genre_id SERIAL,
+    genre_name varchar(255)
 );
 
-CREATE TABLE public.Title(
-    title_id character(20),
-    title_type character(20),
-    original_title character(20),
-    primary_title character(20),
+CREATE TABLE public.title(
+    title_id varchar(255),
+    title_type varchar(255),
+    original_title varchar(255),
+    primary_title varchar(255),
     is_adult boolean,
-    start_year character(4),
-    end_year character(4),
+    start_year varchar(255),
+    end_year varchar(255),
     run_time_minutes int4
 );
 
 
 CREATE TABLE public.crew(
-    title_id character(20),
-    person_id character(20),
-    primary_profession character(10),
-    additional_profession character(10),
+    title_id varchar(255),
+    person_id varchar(255),
+    primary_profession varchar(255),
+    additional_profession varchar(255),
     is_principal boolean,
     ordering int4
 );
 
 
 CREATE TABLE public.characters(
-    character_name character(20),
-    person_id character(20),
-    title_id character(20)
+    character_name varchar(255),
+    person_id varchar(255),
+    title_id varchar(255)
 );
 
 CREATE TABLE public.Title_rating(
-    title_id character(20),
+    title_id varchar(255),
     rating_avg float(10),
-    votes character (10)
+    votes varchar(255)
 );
 
 CREATE TABLE public.Episodes(
-    parent_title_id character(20),
-    title_id character(16),
-    season_nr character(20),
-    episode_nr character(20)
+    parent_title_id varchar(255),
+    title_id varchar(255),
+    season_nr varchar(255),
+    episode_nr varchar(255)
 );
 
 
 CREATE TABLE public.omdb_data (
-    t_id character(10) NOT NULL,
+    t_id varchar(255) NOT NULL,
     poster character varying(256),
     awards text,
     plot text
 );
-
 
 --
 -- Name: wi; Type: TABLE; Schema: public; Owner: -
@@ -132,43 +131,3 @@ CREATE TABLE public.Word_index (
     field character(1) NOT NULL,
     lexeme text
 );
-
-
-
-
-
-
-
---
--- Name: omdb_data omdb_data_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.omdb_data
-    ADD CONSTRAINT omdb_data_pkey PRIMARY KEY (t_id);
-
-
---
--- Name: wi wi_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.word_index
-    ADD CONSTRAINT wi_pkey PRIMARY KEY (t_id, word, field);
-
-
-
-
-
-
-
-
---
--- Name: name_basics; Type: TABLE; Schema: public; Owner: -
---
-
-
-
-
-
-
-
---INSERT DATA HERE
