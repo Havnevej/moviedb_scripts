@@ -28,13 +28,12 @@ INSERT INTO public.Title("title_id", "rating_avg", "votes")
 SELECT "tconst", "", ""
 FROM "public".title_ratings;
 
-hej noel 
-hej noel
-hej noel 
-hej noel 
-hej noel 
-hej noel 
-hej noel 
-hej noel 
-hej noel 
-hej noel 
+efef
+ef
+ef
+ef
+ef
+ef
+ef
+ef
+efe
