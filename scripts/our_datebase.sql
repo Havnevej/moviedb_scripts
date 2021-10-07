@@ -93,6 +93,13 @@ CREATE TABLE public.crew(
     ordering int4
 );
 
+CREATE TABLE public.principals(
+    title_id varchar(255),
+    ordering varchar(255),
+    person_id varchar(255),
+    category varchar(255),
+    job varchar(255)
+);
 
 CREATE TABLE public.characters(
     character_name varchar(255),

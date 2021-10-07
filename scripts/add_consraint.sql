@@ -12,6 +12,9 @@ ALTER TABLE ONLY public.word_index
 ALTER TABLE ONLY public.crew
     ADD CONSTRAINT crew_pkey PRIMARY KEY (title_id, ordering);
 
+ALTER TABLE ONLY public.principals
+    ADD CONSTRAINT principals_pkey PRIMARY KEY (title_id, ordering);
+
 ALTER TABLE ONLY public.characters
     ADD CONSTRAINT characters_pkey PRIMARY KEY (character_name, title_id);
 
