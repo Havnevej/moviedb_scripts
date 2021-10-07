@@ -24,6 +24,20 @@ FROM "public".Genre_key;
 --Title_rating,title_ratings
 TRUNCATE "public".Title_rating;
 
-INSERT INTO public.Title("title_id", "rating_avg", "votes")
-SELECT "tconst", "", ""
+INSERT INTO public.Title_rating("title_id", "rating_avg", "votes")
+SELECT "tconst", "averagerating", "numvotes"
 FROM "public".title_ratings;
+
+--Word_index,wi
+TRUNCATE "public".Word_index;
+
+INSERT INTO public.Word_index("title_id", "word", "field", "lexeme")
+SELECT "tconst", "word", "field", "lexeme"
+FROM "public".wi;
+
+--Episodes,title_episode
+TRUNCATE "public".Episodes;
+
+INSERT INTO public.Episodes("parent_title_id", "title_ud", "season_nr", "episode_nr")
+SELECT "parenttconst", "tconst", "seasonnumber", "episodenumber"
+FROM "public".title_episode;
