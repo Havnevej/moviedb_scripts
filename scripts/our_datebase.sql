@@ -37,7 +37,7 @@ CREATE TABLE public.Profession_key(
 );
 
 CREATE TABLE public.Profession(
-    profession_id SERIAL,
+    person_id varchar(255),
     profession_type varchar(255)
 );
 
