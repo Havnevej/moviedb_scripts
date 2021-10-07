@@ -27,10 +27,8 @@ INSERT INTO public.Episodes("parent_title_id", "title_ud", "season_nr", "episode
 SELECT "parenttconst", "tconst", "seasonnumber", "episodenumber"
 FROM "public".title_episode;
 
-
-
+-- id
 select unnest(string_to_array(primaryprofession, ',')),nconst from name_basics
-
 
 -- person 
 INSERT INTO public.person ("person_id", "person_name","birthyear","deathyear") 
