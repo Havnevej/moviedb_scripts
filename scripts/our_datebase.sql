@@ -84,6 +84,13 @@ CREATE TABLE public.title(
 );
 
 
+CREATE TABLE public.character(
+    character varchar(255),
+    person_id varchar(255),
+    title_id varchar(255)
+)
+
+
 CREATE TABLE public.crew(
     title_id varchar(255),
     person_id varchar(255),
