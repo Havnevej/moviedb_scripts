@@ -9,7 +9,7 @@ $server = "127.0.0.1"
 
 & $PSQL -U postgres -h $server  "-c create database $temp_database_name"
 & $PSQL -U postgres -h $server  "-c create database $our_database_name"
-& $PSQL -U postgres -h $server  -d "$temp_database_name" -f "./scripts/.imdb_small.backup"
+& $PSQL -U postgres -h $server  -d "$temp_database_name" -f "./scripts/imdb_small.backup"
 
 foreach ($script in $order) {
     & $PSQL -U postgres -h $server -d "$our_database_name" -f "./scripts/$script"
