@@ -33,9 +33,9 @@ SELECT "nconst", "primaryname", "birthyear","deathyear"
 from "public".name_basics
 
 -- genre
-INSERT INTO genre (genre_name) 
-select distinct trim(unnest(string_to_array(title_basics.genres, ','))) 
-from title_basics;
+INSERT INTO pulic.genre(title_id,genre_name) 
+SELECT DISTINCT trim(unnest(string_to_array(title_basics.genres, ','))) 
+FROM title_basics;
 
 /*
 -- genre key
