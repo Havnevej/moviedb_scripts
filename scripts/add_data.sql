@@ -48,9 +48,6 @@ SELECT nconst, unnest(string_to_array(knownfortitles, ','))
 from name_basics;
 
 
-
-
-
 /*
 -- genre key
 INSERT INTO public.genre_key("title_id", "genre_id")
