@@ -27,39 +27,42 @@ INSERT INTO public.Episodes("parent_title_id", "title_ud", "season_nr", "episode
 SELECT "parenttconst", "tconst", "seasonnumber", "episodenumber"
 FROM "public".title_episode;
 
--- person 
+--Person 
 INSERT INTO public.person ("person_id", "person_name","birthyear","deathyear") 
 SELECT "nconst", "primaryname", "birthyear","deathyear"
 from "public".name_basics
 
--- genre
+--Genre
 INSERT INTO pulic.genre(title_id,genre_name) 
 SELECT DISTINCT trim(unnest(string_to_array(title_basics.genres, ','))) 
 FROM title_basics;
 
-/*
--- genre key
-INSERT INTO public.genre_key("title_id", "genre_id")
-SELECT "tconst", "genre_id"
-FROM "public".title, "public".genre
-*/
-
--- profession 
+--Profession 
 INSERT INTO public.profession("person_id", "profession_type")
 SELECT nconst, unnest(string_to_array(primaryprofession, ',')) 
 FROM name_basics
 
-/*
--- profession key
-INSERT INTO public.profession_key("person_id", "profession_id")
-SELECT unnest(string_to_array(primaryprofession, ',')), nconst 
-FROM name_basics
-*/
-
--- Known_for_titles
+--Known_for_titles
 INSERT INTO known_for_titles (title_id) 
 select distinct trim(unnest(string_to_array(knownfortitles, ','))) 
 from name_basics;
 
+/*
+-- Genre_key
+INSERT INTO public.genre_key("title_id", "genre_id")
+SELECT "tconst", "genre_id"
+FROM "public".title, "public".genre
 
--- Known_for_tiles_key
+-- Profession_key
+INSERT INTO public.profession_key("person_id", "profession_id")
+SELECT unnest(string_to_array(primaryprofession, ',')), nconst 
+FROM name_basics
+
+
+*/
+
+
+
+
+
+

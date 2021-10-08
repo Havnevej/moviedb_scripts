@@ -57,12 +57,6 @@ CREATE TABLE public.Title(
     run_time_minutes int4
 );
 
-CREATE TABLE public.Character(
-    character_name varchar(255),
-    person_id varchar(255),
-    title_id varchar(255)
-)
-
 CREATE TABLE public.Crew(
     title_id varchar(255),
     person_id varchar(255),
@@ -91,14 +85,12 @@ CREATE TABLE public.Episodes(
     episode_nr varchar(255)
 );
 
-
 CREATE TABLE public.Omdb_data (
     t_id varchar(255) NOT NULL,
     poster character varying(256),
     awards text,
     plot text
 );
-
 
 CREATE TABLE public.Word_index (
     t_id character(10) NOT NULL,
