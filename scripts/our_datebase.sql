@@ -1,10 +1,3 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 12.3
--- Dumped by pg_dump version 12.3
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -20,10 +13,6 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
---
--- Name: name_basics; Type: TABLE; Schema: public; Owner: -
---
-
 CREATE TABLE public.Person (
     person_id varchar(255),
     person_name varchar(255),
@@ -31,23 +20,13 @@ CREATE TABLE public.Person (
     deathyear varchar(255)
 );
 
-CREATE TABLE public.Profession_key(
-    person_id varchar(255),
-    profession_id varchar(255)
-);
-
 CREATE TABLE public.Profession(
-    profession_id SERIAL,
+    person_id varchar(255),
     profession_type varchar(255)
 );
 
-CREATE TABLE public.Known_for_titles_key (
-    person_id varchar(255),
-    k_id varchar(255)
-);
-
 CREATE TABLE public.Known_for_titles (
-    k_id SERIAL,
+    person_id varchar(255),
     title_id varchar(255)
 );
 
@@ -62,13 +41,8 @@ CREATE TABLE public.Title_versions (
     is_original_title boolean
 );
 
-CREATE TABLE public.Genre_key(
-    title_id varchar(255),
-    genre_id varchar(255)
-);
-
 CREATE TABLE public.Genre(
-    genre_id SERIAL,
+    title_id varchar(255),
     genre_name varchar(255)
 );
 
@@ -83,6 +57,11 @@ CREATE TABLE public.title(
     run_time_minutes int4
 );
 
+CREATE TABLE public.character(
+    character varchar(255),
+    person_id varchar(255),
+    title_id varchar(255)
+)
 
 CREATE TABLE public.crew(
     title_id varchar(255),
@@ -91,14 +70,6 @@ CREATE TABLE public.crew(
     additional_profession varchar(255),
     is_principal boolean,
     ordering int4
-);
-
-CREATE TABLE public.principals(
-    title_id varchar(255),
-    ordering varchar(255),
-    person_id varchar(255),
-    category varchar(255),
-    job varchar(255)
 );
 
 CREATE TABLE public.characters(
@@ -128,9 +99,6 @@ CREATE TABLE public.omdb_data (
     plot text
 );
 
---
--- Name: wi; Type: TABLE; Schema: public; Owner: -
---
 
 CREATE TABLE public.Word_index (
     t_id character(10) NOT NULL,
@@ -138,3 +106,21 @@ CREATE TABLE public.Word_index (
     field character(1) NOT NULL,
     lexeme text
 );
+
+/*
+CREATE TABLE public.Genre_key(
+    title_id varchar(255),
+    genre_id varchar(255)
+);
+
+CREATE TABLE public.Profession_key(
+    person_id varchar(255),
+    profession_id varchar(255)
+);
+
+CREATE TABLE public.Known_for_titles_key (
+    person_id varchar(255),
+    k_id varchar(255)
+);
+
+*/
