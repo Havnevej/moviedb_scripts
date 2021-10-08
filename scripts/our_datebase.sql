@@ -46,7 +46,7 @@ CREATE TABLE public.Genre(
     genre_name varchar(255)
 );
 
-CREATE TABLE public.title(
+CREATE TABLE public.Title(
     title_id varchar(255),
     title_type varchar(255),
     original_title varchar(255),
@@ -57,13 +57,13 @@ CREATE TABLE public.title(
     run_time_minutes int4
 );
 
-CREATE TABLE public.character(
-    character varchar(255),
+CREATE TABLE public.Character(
+    character_name varchar(255),
     person_id varchar(255),
     title_id varchar(255)
 )
 
-CREATE TABLE public.crew(
+CREATE TABLE public.Crew(
     title_id varchar(255),
     person_id varchar(255),
     primary_profession varchar(255),
@@ -72,7 +72,7 @@ CREATE TABLE public.crew(
     ordering int4
 );
 
-CREATE TABLE public.characters(
+CREATE TABLE public.Characters(
     character_name varchar(255),
     person_id varchar(255),
     title_id varchar(255)
@@ -92,7 +92,7 @@ CREATE TABLE public.Episodes(
 );
 
 
-CREATE TABLE public.omdb_data (
+CREATE TABLE public.Omdb_data (
     t_id varchar(255) NOT NULL,
     poster character varying(256),
     awards text,
