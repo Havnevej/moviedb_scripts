@@ -20,7 +20,7 @@ ALTER TABLE ONLY public.Person
     ADD CONSTRAINT person_pkey PRIMARY KEY (person_id);
 
 ALTER TABLE ONLY public.Profession
-    ADD CONSTRAINT profession_pkey PRIMARY KEY (person_id);
+    ADD CONSTRAINT profession_pkey PRIMARY KEY (person_id, profession_type);
 
 ALTER TABLE ONLY public.Known_for_titles
     ADD CONSTRAINT known_for_titles_pkey PRIMARY KEY (person_id, title_id);
@@ -29,7 +29,7 @@ ALTER TABLE ONLY public.Title_versions
     ADD CONSTRAINT Title_versions_pkey PRIMARY KEY (title_id,title_version);
 
 ALTER TABLE ONLY public.Genre
-    ADD CONSTRAINT genre_pkey PRIMARY KEY (title_id);
+    ADD CONSTRAINT genre_pkey PRIMARY KEY (title_id, genre_name);
 
 ALTER TABLE ONLY public.Episodes
     ADD CONSTRAINT episodes_pkey PRIMARY KEY (parent_title_id, title_id);
