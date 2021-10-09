@@ -48,6 +48,9 @@ INSERT INTO public.omdb ("title_id", "poster","awards","plot")
 SELECT "tconst", "poster","awards","plot"
 FROM "public".omdb_data;
 
+INSERT INTO public.principals ("title_id", "ordering","person_id","category", "job") 
+SELECT tconst, ordering, nconst, category, job
+FROM "public".title_principals;
 
 /*
 -- genre key
