@@ -1,6 +1,4 @@
 --Title,title_basics
-TRUNCATE "public".titletest;
-
 INSERT INTO public.Title("title_id", "title_type", "original_title", 
 "primary_title", "is_adult", "start_year", "end_year", "run_time_minutes" )
 SELECT  "tconst","titletype","originaltitle","primarytitle","isadult","startyear","endyear","runtimeminutes"
@@ -51,6 +49,11 @@ FROM name_basics;
 INSERT INTO "public".characters (person_id, title_id, character_name)
 SELECT nconst, tconst, unnest(string_to_array(characters, ','))
 FROM "public".title_principals;
+
+INSERT INTO public.omdb ("title_id", "poster","awards","plot") 
+SELECT "tconst", "poster","awards","plot"
+FROM "public".omdb_data
+
 
 
 
