@@ -93,7 +93,7 @@ CREATE TABLE public.Omdb_data (
 );
 
 CREATE TABLE public.Word_index (
-    t_id character(10) NOT NULL,
+    title_id character(10) NOT NULL,
     word text NOT NULL,
     field character(1) NOT NULL,
     lexeme text
