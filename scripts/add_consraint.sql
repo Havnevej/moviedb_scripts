@@ -8,7 +8,7 @@ ALTER TABLE ONLY public.crew
     ADD CONSTRAINT crew_pkey PRIMARY KEY (title_id, ordering);
 
 ALTER TABLE ONLY public.character_names
-    ADD CONSTRAINT character_names_pkey PRIMARY KEY (person_id, title_id, characte_name);
+    ADD CONSTRAINT character_names_pkey PRIMARY KEY (person_id, title_id, character_name);
 
 ALTER TABLE ONLY public.Title_rating
     ADD CONSTRAINT title_rating_pkey PRIMARY KEY (title_id);
