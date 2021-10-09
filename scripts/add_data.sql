@@ -40,7 +40,7 @@ SELECT nconst, unnest(string_to_array(knownfortitles, ','))
 FROM name_basics;
 
 --Characters
-INSERT INTO "public".characters (person_id, title_id, character_name)
+INSERT INTO "public".character_names (person_id, title_id, character_name)
 SELECT nconst, tconst, unnest(string_to_array(characters, ','))
 FROM "public".title_principals;
 
