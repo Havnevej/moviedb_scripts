@@ -45,7 +45,7 @@ SELECT
 	DISTINCT on (nconst, tconst, unnest(string_to_array(characters, ',')))
 		nconst, tconst, unnest(string_to_array(characters, ','))
 FROM "public".title_principals;
-DROP TABLE "public".character_names;
+--DROP TABLE "public".character_names;
 ALTER TABLE "public".character_names_temp
 RENAME TO character_names;
 
