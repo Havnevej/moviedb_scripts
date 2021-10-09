@@ -40,9 +40,15 @@ SELECT nconst, unnest(string_to_array(knownfortitles, ','))
 FROM name_basics;
 
 --Character_names
-INSERT INTO "public".character_names (person_id, title_id, character_name)
-SELECT nconst, tconst, unnest(string_to_array(characters, ','))
+INSERT INTO "public".character_names_temp (person_id, title_id, character_name)
+SELECT 
+	DISTINCT on (nconst, tconst, unnest(string_to_array(characters, ',')))
+		nconst, tconst, unnest(string_to_array(characters, ','))
 FROM "public".title_principals;
+
+DROP TABLE "public".character_names;
+ALTER TABLE "public".character_names_temp
+RENAME TO character_names;
 
 --Omdb
 INSERT INTO public.omdb ("title_id", "poster","awards","plot") 
