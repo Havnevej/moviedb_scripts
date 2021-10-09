@@ -55,8 +55,6 @@ SELECT "tconst", "poster","awards","plot"
 FROM "public".omdb_data
 
 
-
-
 /*
 -- genre key
 INSERT INTO public.genre_key("title_id", "genre_id")
