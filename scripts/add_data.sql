@@ -1,5 +1,5 @@
 --Title,title_basics
-TRUNCATE "public".titletest;
+TRUNCATE "public".title;
 
 INSERT INTO public.Title("title_id", "title_type", "original_title", 
 "primary_title", "is_adult", "start_year", "end_year", "run_time_minutes" )
