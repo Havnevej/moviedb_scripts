@@ -39,26 +39,28 @@ INSERT INTO "public".Known_for_titles (person_id, title_id)
 SELECT nconst, unnest(string_to_array(knownfortitles, ','))
 FROM name_basics;
 
---Characters
+--Character_names
 INSERT INTO "public".character_names (person_id, title_id, character_name)
 SELECT nconst, tconst, unnest(string_to_array(characters, ','))
 FROM "public".title_principals;
 
+--Omdb
 INSERT INTO public.omdb ("title_id", "poster","awards","plot") 
 SELECT "tconst", "poster","awards","plot"
 FROM "public".omdb_data;
 
+--Principals
 INSERT INTO public.principals ("title_id", "ordering","person_id","category", "job") 
 SELECT tconst, ordering, nconst, category, job
 FROM "public".title_principals;
 
 /*
--- genre key
+-- Genre key
 INSERT INTO public.genre_key("title_id", "genre_id")
 SELECT "tconst", "genre_id"
 FROM "public".title, "public".genre
 
--- profession key
+-- Profession key
 INSERT INTO public.profession_key("person_id", "profession_id")
 SELECT unnest(string_to_array(primaryprofession, ',')), nconst 
 FROM name_basics
