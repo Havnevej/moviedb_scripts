@@ -28,24 +28,30 @@ SELECT "parenttconst", "tconst", "seasonnumber", "episodenumber"
 FROM "public".title_episode;
 
 --Person 
-INSERT INTO public.person ("person_id", "person_name","birthyear","deathyear") 
+INSERT INTO public.Person ("person_id", "person_name","birthyear","deathyear") 
 SELECT "nconst", "primaryname", "birthyear","deathyear"
 from "public".name_basics
 
 --Genre
-INSERT INTO public.genre(title_id,genre_name) 
+INSERT INTO public.Genre(title_id,genre_name) 
 SELECT tconst, unnest(string_to_array(genres, ','))
 FROM title_basics;
 
 --Profession 
-INSERT INTO public.profession("person_id", "profession_type")
+INSERT INTO public.Profession("person_id", "profession_type")
 SELECT nconst, unnest(string_to_array(primaryprofession, ',')) 
 FROM name_basics
 
 --Known_for_titles
-INSERT INTO "public".known_for_titles (person_id, title_id) 
+INSERT INTO "public".Known_for_titles (person_id, title_id) 
 SELECT nconst, unnest(string_to_array(knownfortitles, ','))
-from name_basics;
+FROM name_basics;
+
+--Characters
+INSERT INTO "public".Characters (person_id, title_id, character_name) 
+SELECT nconst, tconst, unnest(string_to_array(characters, ','))
+FROM title_principals;
+
 
 
 /*
