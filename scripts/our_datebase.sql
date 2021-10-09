@@ -99,6 +99,15 @@ CREATE TABLE public.Word_index (
     lexeme text
 );
 
+CREATE TABLE public.Principals (
+    title_id character(10) NOT NULL,
+    ordering int4 NOT NULL,
+    person_id VARCHAR(255) NOT NULL,
+    category VARCHAR(255),
+    job VARCHAR(255)
+);
+
+
 /*
 CREATE TABLE public.Genre_key(
     title_id varchar(255),
