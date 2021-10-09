@@ -66,7 +66,7 @@ CREATE TABLE public.Crew(
     ordering int4
 );
 
-CREATE TABLE public.Characters(
+CREATE TABLE public.Character_names(
     character_name varchar(255),
     person_id varchar(255),
     title_id varchar(255)
