@@ -85,8 +85,8 @@ CREATE TABLE public.Episodes(
     episode_nr varchar(255)
 );
 
-CREATE TABLE public.Omdb_data (
-    t_id varchar(255) NOT NULL,
+CREATE TABLE public.Omdb (
+    title_id varchar(255) NOT NULL,
     poster character varying(256),
     awards text,
     plot text
