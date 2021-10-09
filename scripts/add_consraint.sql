@@ -1,5 +1,5 @@
 ALTER TABLE ONLY public.omdb
-    ADD CONSTRAINT omdb_data_pkey PRIMARY KEY (title_id);
+    ADD CONSTRAINT omdb_pkey PRIMARY KEY (title_id);
 
 ALTER TABLE ONLY public.word_index
     ADD CONSTRAINT word_index_pkey PRIMARY KEY (title_id);
