@@ -23,7 +23,7 @@ FROM "public".wi;
 --Episodes,title_episode
 TRUNCATE "public".Episodes;
 
-INSERT INTO public.Episodes("parent_title_id", "title_ud", "season_nr", "episode_nr")
+INSERT INTO public.Episodes("parent_title_id", "title_id", "season_nr", "episode_nr")
 SELECT "parenttconst", "tconst", "seasonnumber", "episodenumber"
 FROM "public".title_episode;
 
