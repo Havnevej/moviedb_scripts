@@ -72,12 +72,6 @@ CREATE TABLE public.Character_names_temp(
     title_id varchar(255)
 );
 
-CREATE TABLE public.Character_names(
-    character_name varchar(255),
-    person_id varchar(255),
-    title_id varchar(255)
-);
-
 CREATE TABLE public.Title_rating(
     title_id varchar(255),
     rating_avg float(10),
