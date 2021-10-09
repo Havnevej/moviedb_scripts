@@ -94,9 +94,9 @@ CREATE TABLE public.Omdb (
 
 CREATE TABLE public.Word_index (
     title_id character(10) NOT NULL,
-    word text NOT NULL,
-    field character(1) NOT NULL,
-    lexeme text
+    word VARCHAR(255),
+    field VARCHAR(255),
+    lexeme VARCHAR(255)
 );
 
 CREATE TABLE public.Principals (
