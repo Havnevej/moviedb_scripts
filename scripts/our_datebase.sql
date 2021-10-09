@@ -66,6 +66,12 @@ CREATE TABLE public.Crew(
     ordering int4
 );
 
+CREATE TABLE public.Character_names_temp(
+    character_name varchar(255),
+    person_id varchar(255),
+    title_id varchar(255)
+);
+
 CREATE TABLE public.Character_names(
     character_name varchar(255),
     person_id varchar(255),
