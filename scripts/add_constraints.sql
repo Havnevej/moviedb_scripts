@@ -7,7 +7,7 @@ ALTER TABLE ONLY public.word_index
 ALTER TABLE ONLY public.crew
     ADD CONSTRAINT crew_pkey PRIMARY KEY (title_id, ordering);
 
-ALTER TABLE ONLY public.character_names
+ALTER TABLE ONLY public.character_names_temp
     ADD CONSTRAINT character_names_pkey PRIMARY KEY (person_id, title_id, character_name);
 
 ALTER TABLE ONLY public.Title_rating
