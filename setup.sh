@@ -17,7 +17,11 @@ function setup_databases {
             echo -e "${RED}creating imdb database${NC}"
             psql -U postgres -h $server  "-c create database $database_name"
             echo -e "${RED}restoring imdb database from backup${NC}"
-            psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_small.backup"
+            if [ "$1" == "big" ]; then 
+                psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_big.backup"
+            else
+                psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_small.backup"
+            fi
         fi
     fi
 }
@@ -32,7 +36,11 @@ function run_scripts {
 if [ "$1" == "only_our" ]; then
     run_scripts
 else
-    setup_databases
+    if [ "$1" == "big" ]; then 
+        setup_databases "big"
+    else
+        setup_databases
+    fi
     run_scripts
 fi
 
