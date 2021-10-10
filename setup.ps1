@@ -1,7 +1,7 @@
 $PSQL=""
 $env:PGPASSWORD='postgres'
 $env:PGOPTIONS="-c client_min_messages=error"
-$order = @("add_database_and_tables.sql", "add_constraints.sql", "add_data.sql", "functions.sql", "final.sql")
+$order = @("functions.sql")
 $database_name = "imdb"
 $server = "127.0.0.1"
 
@@ -11,6 +11,8 @@ if(Test-Path -Path "C:\Program Files\PostgreSQL\13\bin\psql.exe"){
 } elseif (Test-Path -Path "C:\Program Files\PostgreSQL\14\bin\psql.exe"){
     Write-Host "Using psql ver. 14"
     $PSQL="C:\Program Files\PostgreSQL\14\bin\psql.exe" #version 14
+} elseif (Get-Command "psql" -errorAction SilentlyContinue){
+    $PSQL="psql"
 }
 
 function setup_databases{
@@ -26,7 +28,7 @@ function run_scripts{
     Write-Host "[$order]"  -ForegroundColor yellow
     foreach ($script in $order) {
         Write-Host "running $script" -ForegroundColor red
-        & $PSQL -U postgres -h $server -d "$database_name" -q -f "./scripts/$script" 
+        & $PSQL -U postgres -h $server -d "$database_name" -f "./scripts/$script" 
     }
 }
 if($args[0] -eq "ours_only"){
