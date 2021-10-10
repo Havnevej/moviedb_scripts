@@ -19,3 +19,7 @@ https://trello.com/c/LyzgwJsm/16-design-er-diagram
 
 C. The Framework model (udkast, kig endelig og lav rettelser)
 https://lucid.app/lucidchart/invitations/accept/inv_d3c80e51-e248-4387-86e6-fd53cca90d5b?viewport_loc=-93%2C229%2C1805%2C1028%2C0_0
+
+
+Report:
+https://docs.google.com/document/d/1rBgpNPjAfU6ceJvXZxM26CBIz4bCD-PDej1RRZKW10A/edit?usp=sharing
