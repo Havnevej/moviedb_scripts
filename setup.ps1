@@ -28,7 +28,7 @@ function run_scripts{
     Write-Host "[$order]"  -ForegroundColor yellow
     foreach ($script in $order) {
         Write-Host "running $script" -ForegroundColor red
-        & $PSQL -U postgres -h $server -d "$database_name" -f "./scripts/$script" 
+        & $PSQL -U postgres -h $server -d "$database_name" -q -f "./scripts/$script" 
     }
 }
 if($args[0] -eq "ours_only"){
