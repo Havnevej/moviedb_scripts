@@ -21,7 +21,11 @@ function setup_databases{
     Write-Host "creating imdb database" -ForegroundColor red
     & $PSQL -U postgres -h $server  "-c create database $database_name"
     Write-Host "restoring imdb database from backup" -ForegroundColor red
-    & $PSQL -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_small.backup"
+    if($args[0] -eq "big"){
+        & $PSQL -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_big.backup"
+    } else {
+        & $PSQL -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_small.backup"
+    }
 }
 function run_scripts{
     Write-Host "Running our scripts in order:"  -ForegroundColor green
@@ -34,7 +38,11 @@ function run_scripts{
 if($args[0] -eq "ours_only"){
     run_scripts
 } else {
-    setup_databases
+    if($args[0] -eq "big"){
+        setup_databases big
+    } else {
+        setup_databases
+    }
     run_scripts
 }
 
