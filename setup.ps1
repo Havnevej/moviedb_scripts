@@ -1,7 +1,7 @@
 $PSQL=""
 $env:PGPASSWORD='postgres'
 $env:PGOPTIONS="-c client_min_messages=error"
-$order = @("functions.sql")
+$order = @("add_database_and_tables.sql", "add_constraints.sql", "add_data.sql", "functions.sql", "final.sql")
 $database_name = "imdb"
 $server = "127.0.0.1"
 
