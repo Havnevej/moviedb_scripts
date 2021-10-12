@@ -41,6 +41,26 @@ ALTER TABLE ONLY public.Principals
     ADD CONSTRAINT principals_pkey PRIMARY KEY (title_id, ordering);
 
 
+--Setting constraints for user (c framework)
+
+ALTER TABLE ONLY public.Person_rating
+    ADD CONSTRAINT person_rating_pkey PRIMARY KEY (person_id);
+
+ALTER TABLE ONLY public.User
+    ADD CONSTRAINT person_rating_pkey PRIMARY KEY (user_id);
+
+ALTER TABLE ONLY public.User_title_rating
+    ADD CONSTRAINT user_title_rating_pkey PRIMARY KEY (user_id);
+
+ALTER TABLE ONLY public.Bookmark_title
+    ADD CONSTRAINT bookmark_title_pkey PRIMARY KEY (user_id);
+
+ALTER TABLE ONLY public.Bookmark_person
+    ADD CONSTRAINT bookmark_person_pkey PRIMARY KEY (user_id);
+
+ALTER TABLE ONLY public.Search_history
+    ADD CONSTRAINT search_history_pkey PRIMARY KEY (user_id);
+
 /*
 ALTER TABLE ONLY public.Genre_key
     ADD CONSTRAINT genre_key_pkey PRIMARY KEY (title_id);
