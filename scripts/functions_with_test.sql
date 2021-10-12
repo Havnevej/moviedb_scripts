@@ -1,5 +1,4 @@
 -- D1
-Create table "user"(user_id varchar, user_name varchar, "password" varchar);
 CREATE EXTENSION pgcrypto;
 create or replace function create_user(user_id varchar, user_name varchar, user_pwd varchar) returns void language plpgsql
 as
@@ -227,7 +226,7 @@ order by countt desc limit limitt;
 end;
 $$;
 
-select c_id as actor_id, c_name as actor_name, countt as frequency from m_freq_co_worker('Daniel Craig', 10)
+select c_id as actor_id, c_name as actor_name, countt as frequency from m_freq_co_worker('Daniel Craig', 10);
 
 
 --TEST QUERY
@@ -239,7 +238,6 @@ order by countt desc limit 3;*/
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- D7
-
 create or replace function person_rate2() returns void language plpgsql as
 $$
 declare 
@@ -250,13 +248,13 @@ counter float :=1;
 
 begin
 create index h on person(person_name);
-for r in SELECT distinct person_name from person join characters on "characters".person_id=person.person_id join title_rating on "characters".title_id = title_rating.title_id join profession on profession.person_id = "characters".person_id where profession.profession_type = 'actor'
+for r in SELECT distinct person_name from person join character_names on "character_names".person_id=person.person_id join title_rating on "character_names".title_id = title_rating.title_id join profession on profession.person_id = "character_names".person_id where profession.profession_type = 'actor'
 	loop
 	weight:=1;
 	counter:=1;
-		for r2 in SELECT cast(votes as integer) from person join characters on 
-				person.person_id = "characters".person_id join title_rating on 
-				title_rating.title_id = "characters".title_id 
+		for r2 in SELECT cast(votes as integer) from person join character_names on 
+				person.person_id = "character_names".person_id join title_rating on 
+				title_rating.title_id = "character_names".title_id 
 				where person_name = r.person_name
 		loop
 					if 
@@ -280,14 +278,14 @@ for r in SELECT distinct person_name from person join characters on "characters"
 			
 			--rating
 			(select sum(cast(rating_avg as integer))/count(rating_avg)
-					from person join characters on person.person_id = "characters".person_id join title_rating on title_rating.title_id =   
-					"characters".title_id 
+					from person join character_names on person.person_id = "character_names".person_id join title_rating on title_rating.title_id =   
+					"character_names".title_id 
 					where person_name = r.person_name),
 			
 			 
 			--num_votes		
-			(select sum(cast(votes as integer)) from person join characters on person.person_id = "characters".person_id join title_rating on 
-					title_rating.title_id = "characters".title_id 
+			(select sum(cast(votes as integer)) from person join character_names on person.person_id = "character_names".person_id join title_rating on 
+					title_rating.title_id = "character_names".title_id 
 					where person_name = r.person_name)
 		);	
 	end loop;

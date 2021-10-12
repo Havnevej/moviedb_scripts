@@ -113,6 +113,7 @@ CREATE TABLE public.Principals (
 CREATE TABLE person_rating (
     person_id VARCHAR(255), 
     person_name VARCHAR(255), 
+    weight float,
     rating BIGINT, 
     num_votes BIGINT
     );
