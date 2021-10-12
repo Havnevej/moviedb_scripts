@@ -2,6 +2,10 @@
 scripts for moviedb
 <br>
 
+In order to run the solution you insert your password into the password variable in either *setup.sh*(mac/linux) or *setup.ps1*(windows). Then you run the desired script acording to your OS.
+- It is assumed that you have a local postgres server running with a user called postgres.
+- You can provide "big" as an argument to either script, and it will download the big version of the database and use that instead.
+
 Mockup:
 <br>
 https://wireframepro.mockflow.com/space/MeKtt9xcNmb
