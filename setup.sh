@@ -9,7 +9,7 @@ order=('add_database_and_tables.sql' 'add_constraints.sql' 'add_data.sql' 'funct
 database_name="imdb"
 server="127.0.0.1"
 
-imdb_small= "imdb_small.backup"
+imdb_small="imdb_small.backup"
 imdb_large="imdb_large.backup"
 
 if test -f "./scripts/imdb_large.backup.icloud"; then
