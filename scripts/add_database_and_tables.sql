@@ -57,13 +57,14 @@ CREATE TABLE public.Title(
     run_time_minutes int4
 );
 
-CREATE TABLE public.Crew(
+CREATE TABLE public.director(
     title_id varchar(255),
-    person_id varchar(255),
-    primary_profession varchar(255),
-    additional_profession varchar(255),
-    is_principal boolean,
-    ordering int4
+    director_id varchar(255),
+);
+
+CREATE TABLE public.writer(
+    title_id varchar(255),
+    writer_id varchar(255),
 );
 
 CREATE TABLE public.Character_names_temp(
