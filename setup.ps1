@@ -1,5 +1,6 @@
 $PSQL=""
 $env:PGPASSWORD='postgres'
+$user="postgres"
 $env:PGOPTIONS="-c client_min_messages=error"
 $order = @("add_database_and_tables.sql", "add_constraints.sql", "add_data.sql", "functions.sql", "final.sql")
 $database_name = "imdb"
@@ -17,14 +18,14 @@ if(Test-Path -Path "C:\Program Files\PostgreSQL\13\bin\psql.exe"){
 
 function setup_databases{
     Write-Host "dropping imdb database" -ForegroundColor red
-    & $PSQL -U postgres -h $server  "-c drop database $database_name WITH (FORCE);"
+    & $PSQL -U $user -h $server  "-c drop database $database_name WITH (FORCE);"
     Write-Host "creating imdb database" -ForegroundColor red
-    & $PSQL -U postgres -h $server  "-c create database $database_name"
+    & $PSQL -U $user -h $server  "-c create database $database_name"
     Write-Host "restoring imdb database from backup" -ForegroundColor red
     if($args[0] -eq "big"){
-        & $PSQL -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_large.backup"
+        & $PSQL -U $user -h $server  -d "$database_name" -q -f "./scripts/imdb_large.backup"
     } else {
-        & $PSQL -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_small.backup"
+        & $PSQL -U $user -h $server  -d "$database_name" -q -f "./scripts/imdb_small.backup"
     }
 }
 function run_scripts{
@@ -32,7 +33,7 @@ function run_scripts{
     Write-Host "[$order]"  -ForegroundColor yellow
     foreach ($script in $order) {
         Write-Host "running $script" -ForegroundColor red
-        & $PSQL -U postgres -h $server -d "$database_name" -q -f "./scripts/$script" 
+        & $PSQL -U $user -h $server -d "$database_name" -q -f "./scripts/$script" 
     }
 }
 if($args[0] -eq "ours_only"){
