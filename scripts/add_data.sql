@@ -1,32 +1,32 @@
 --Title,title_basics
 INSERT INTO public.Title("title_id", "title_type", "original_title", 
 "primary_title", "is_adult", "start_year", "end_year", "run_time_minutes" )
-SELECT  "tconst","titletype","originaltitle","primarytitle","isadult","startyear","endyear","runtimeminutes"
+SELECT DISTINCT on ("tconst") "tconst","titletype","originaltitle","primarytitle","isadult","startyear","endyear","runtimeminutes"
 FROM "public".title_basics; 
 
 --Title_rating,title_ratings
 INSERT INTO public.Title_rating("title_id", "rating_avg", "votes")
-SELECT "tconst", "averagerating", "numvotes"
+SELECT DISTINCT on ("tconst") "tconst", "averagerating", "numvotes"
 FROM "public".title_ratings;
 
 --Word_index,wi
 INSERT INTO public.Word_index("title_id", "word", "field", "lexeme")
-SELECT "tconst", "word", "field", "lexeme"
+SELECT DISTINCT on ("tconst", "word", "field") "tconst", "word", "field", "lexeme"
 FROM "public".wi;
 
 --Episodes,title_episode
 INSERT INTO public.Episodes("parent_title_id", "title_id", "season_nr", "episode_nr")
-SELECT "parenttconst", "tconst", "seasonnumber", "episodenumber"
+SELECT DISTINCT on ("tconst", "parenttconst") "parenttconst", "tconst", "seasonnumber", "episodenumber"
 FROM "public".title_episode;
 
 --Person 
 INSERT INTO public.Person ("person_id", "person_name","birthyear","deathyear") 
-SELECT "nconst", "primaryname", "birthyear","deathyear"
+SELECT DISTINCT on ("nconst") "nconst", "primaryname", "birthyear","deathyear"
 FROM "public".name_basics;
 
 --Genre
 INSERT INTO public.Genre(title_id,genre_name) 
-SELECT tconst, unnest(string_to_array(genres, ','))
+SELECT DISTINCT on ("tconst") tconst, unnest(string_to_array(genres, ','))
 FROM title_basics;
 
 --Profession 
@@ -51,7 +51,7 @@ RENAME TO character_names;
 
 --Omdb
 INSERT INTO public.omdb ("title_id", "poster","awards","plot") 
-SELECT "tconst", "poster","awards","plot"
+SELECT DISTINCT on ("tconst") "tconst", "poster","awards","plot"
 FROM "public".omdb_data;
 
 --Principals

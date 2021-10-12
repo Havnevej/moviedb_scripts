@@ -22,7 +22,7 @@ function setup_databases{
     & $PSQL -U postgres -h $server  "-c create database $database_name"
     Write-Host "restoring imdb database from backup" -ForegroundColor red
     if($args[0] -eq "big"){
-        & $PSQL -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_big.backup"
+        & $PSQL -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_large.backup"
     } else {
         & $PSQL -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_small.backup"
     }
