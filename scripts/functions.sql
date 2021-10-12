@@ -1,5 +1,5 @@
 -- D1
---Create table "user"(user_id varchar, user_name varchar, "password" varchar)
+Create table "user"(user_id varchar, user_name varchar, "password" varchar);
 CREATE EXTENSION pgcrypto;
 create or replace function create_user(user_id varchar, user_name varchar, user_pwd varchar) returns void language plpgsql
 as
