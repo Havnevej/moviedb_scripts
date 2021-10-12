@@ -108,6 +108,44 @@ CREATE TABLE public.Principals (
     job VARCHAR(255)
 );
 
+-- CREATE Tables user (C framework)
+
+CREATE TABLE person_rating (
+    person_id VARCHAR(255), 
+    person_name VARCHAR(255), 
+    rating BIGINT, 
+    num_votes BIGINT
+    );
+
+CREATE TABLE public.user (
+    user_id VARCHAR(255),
+    user_name VARCHAR(255),
+    password VARCHAR(255)
+    );
+CREATE EXTENSION pgcrypto;
+
+CREATE TABLE user_title_rating(
+    user_id VARCHAR(255),
+    title_id VARCHAR(255),
+    rating VARCHAR(255)
+    );
+
+CREATE TABLE bookmark_title(
+    user_id VARCHAR(255),
+    title_id VARCHAR(255)
+    );
+
+CREATE TABLE bookmark_person(
+    user_id VARCHAR(255),
+    person_id VARCHAR(255)
+    );
+
+CREATE TABLE search_history(
+    user_id VARCHAR(255),
+    search_string VARCHAR(255),
+    date VARCHAR(255)
+    );
+
 
 /*
 CREATE TABLE public.Genre_key(
