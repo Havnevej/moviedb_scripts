@@ -4,8 +4,11 @@ ALTER TABLE ONLY public.omdb
 ALTER TABLE ONLY public.word_index
     ADD CONSTRAINT word_index_pkey PRIMARY KEY (title_id, word, field);
 
-ALTER TABLE ONLY public.crew
-    ADD CONSTRAINT crew_pkey PRIMARY KEY (title_id, ordering);
+ALTER TABLE ONLY public.director
+    ADD CONSTRAINT director_pkey PRIMARY KEY (director_id, title_id);
+
+ALTER TABLE ONLY public.writer
+    ADD CONSTRAINT writer_pkey PRIMARY KEY (writer_id, title_id);
 
 ALTER TABLE ONLY public.character_names_temp
     ADD CONSTRAINT character_names_pkey PRIMARY KEY (person_id, title_id, character_name);
@@ -33,6 +36,10 @@ ALTER TABLE ONLY public.Genre
 
 ALTER TABLE ONLY public.Episodes
     ADD CONSTRAINT episodes_pkey PRIMARY KEY (parent_title_id, title_id);
+
+ALTER TABLE ONLY public.Principals
+    ADD CONSTRAINT principals_pkey PRIMARY KEY (title_id, ordering);
+
 
 /*
 ALTER TABLE ONLY public.Genre_key
