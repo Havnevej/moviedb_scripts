@@ -1,6 +1,4 @@
 -- D1
-Create table "user"(user_id varchar, user_name varchar, "password" varchar);
-CREATE EXTENSION pgcrypto;
 create or replace function create_user(user_id varchar, user_name varchar, user_pwd varchar) returns void language plpgsql
 as
 $$
@@ -42,20 +40,6 @@ end;
 $$;
 
 --select update_user('Larry', 'CatsAndDogs1234', 'John');
-
-
------------------------------------------------------------------------------------------------------------------------------
-
---create rating table
-
-create table user_title_rating(user_id varchar, title_id varchar, rating varchar);
-
---create bookmark_title
-create table bookmark_title(user_id varchar, title_id varchar);
-
---create bookmark_person
-create table bookmark_person(user_id varchar, person_id varchar);
-
 
 -----------------------------------------------------------------------------------------------------------------------------
 --create functions for user_rating, bookmarks
@@ -103,9 +87,6 @@ $$;
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- Search with history log:
-
-create table search_history(user_id varchar, search_string varchar, "date" varchar);
-
 create or replace function string_search(string varchar, user_id varchar) returns 
 table(
     t_id varchar,
@@ -256,9 +237,6 @@ order by countt desc limit 3;*/
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- D7
-
-create table person_rating (person_id varchar, person_name varchar, rating bigint, num_votes bigint);
-
 create or replace function person_rate2() returns void language plpgsql as
 $$
 declare 
