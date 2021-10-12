@@ -37,6 +37,12 @@ if [ "$1" == "only_our" ]; then
     run_scripts
 else
     if [ "$1" == "big" ]; then 
+        if ! test -f "./scripts/imdb_large.backup"; then
+            sudo apt install unzip
+            wget https://www.dropbox.com/s/nmh4l73wf79gubi/imdb_large.backup.zip?dl=1 -O "./scripts/large.zip"
+            unzip "./scripts/large.zip" -d "./scripts/"
+            rm "./scripts/large.zip"
+        fi
         setup_databases "big"
     else
         setup_databases
