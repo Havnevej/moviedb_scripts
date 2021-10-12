@@ -59,12 +59,12 @@ CREATE TABLE public.Title(
 
 CREATE TABLE public.Director(
     title_id varchar(255),
-    director_id varchar(255),
+    director_id varchar(255)
 );
 
 CREATE TABLE public.Writer(
     title_id varchar(255),
-    writer_id varchar(255),
+    writer_id varchar(255)
 );
 
 CREATE TABLE public.Character_names_temp(
