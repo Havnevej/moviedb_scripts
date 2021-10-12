@@ -9,10 +9,10 @@ begin
 end;
 $$;
 --Create user
-select create_user('3', 'Larry', 'CatsAndDogs1234');
+--select create_user('3', 'Larry', 'CatsAndDogs1234');
 
 --Authentication:
-SELECT * from "user" where "user".password = crypt('CatsAndDogs1234', password);
+--SELECT * from "user" where "user".password = crypt('CatsAndDogs1234', password);
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ delete from "user" * where user_name = u_name and password = crypt(u_pwd, passwo
 end;
 $$;
 
-SELECT delete_user('Larry','CatsAndDogs1234');
+--SELECT delete_user('Larry','CatsAndDogs1234');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ update "user" set user_name = new_uname where user_name = u_name and password = 
 end;
 $$;
 
-SELECT update_user('Larry', 'CatsAndDogs1234', 'John');
+--SELECT update_user('Larry', 'CatsAndDogs1234', 'John');
 
 -----------------------------------------------------------------------------------------------------------------------------
 --create functions for user_rating, bookmarks
@@ -84,7 +84,7 @@ where Title.primary_title like '%' || string || '%';
 end; 
 $$; 
 
-select string_search('Parasite'); 
+--select string_search('Parasite'); 
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ $$
 	end; 
 $$; 
 
-select string_search('Parasite', '21');
+--select string_search('Parasite', '21');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -135,7 +135,7 @@ end;
 $$;
 
 --test query:
-select user_rate_title ('55', 'tt0108549 ', '10');
+--select user_rate_title ('55', 'tt0108549 ', '10');
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- D4
@@ -165,7 +165,7 @@ insert into search_history (user_id, search_string, "date") VALUES (user_id, sea
 end; 
 $$;
 
-select structured_string_search('Parasite', '', '', '', '12');
+--select structured_string_search('Parasite', '', '', '', '12');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -188,8 +188,7 @@ insert into search_history (user_id, search_string, "date") VALUES (user_id, act
 end;
 $$;
 
-select * from search_by_actor_name('Daniel', '22');
-
+--select * from search_by_actor_name('Daniel', '22');
 
 -----------------------------------------------------------------------------------------------------------------------------
 -- D6
@@ -227,7 +226,7 @@ order by countt desc limit limitt;
 end;
 $$;
 
-select c_id as actor_id, c_name as actor_name, countt as frequency from m_freq_co_worker('Daniel Craig', 10)
+--select c_id as actor_id, c_name as actor_name, countt as frequency from m_freq_co_worker('Daniel Craig', 10)
 
 
 --TEST QUERY
@@ -265,9 +264,7 @@ for r in SELECT distinct person_name from person join characters on "characters"
 end;
 $$;
 
-select person_rate2();
-
-if num_votes > 100000 * 1.2
+--select person_rate2();
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- D8
@@ -301,7 +298,7 @@ desc;
 end;
 $$;
 
-select * from co_actor_popularity('Daniel Craig');
+--select * from co_actor_popularity('Daniel Craig');
 
 
 -----------------------------------------------------------------------------------------------------------------------------
@@ -326,7 +323,7 @@ select  s.title_id, s.primary_title, f.genre_name from genre as f join title as 
 end;
 $$;
 
-select * from similar_titles ('Casino Royale');
+--select * from similar_titles ('Casino Royale');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -350,7 +347,7 @@ WHERE t.title_id=w.title_id;
 end;
 $$;
 
-SELECT * from exact_match('apple', 'mads', 'mikkelsen');
+--SELECT * from exact_match('apple', 'mads', 'mikkelsen');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -373,7 +370,7 @@ GROUP BY t.title_id, primary_title ORDER BY rank DESC limit 10;
 end;
 $$;
 
-SELECT * FROM best_match('apple','mads','mikkelsen');
+--SELECT * FROM best_match('apple','mads','mikkelsen');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -395,4 +392,4 @@ end loop;
 end;
 $$;
 
-SELECT * from word_to_word('olivia', 'jim', 'corin') order by rank desc; 
+--SELECT * from word_to_word('olivia', 'jim', 'corin') order by rank desc; 
