@@ -19,6 +19,8 @@ if test -f "./scripts/imdb_small.backup.icloud"; then
     imdb_small="./scripts/imdb_small.backup.icloud"
 fi
 
+mkdir -p "./scripts/output/"
+
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
@@ -40,7 +42,7 @@ function setup_databases {
 function run_scripts {
     for script in "${order[@]}"; do
         echo -e "${RED}running script: $script ${NC}"
-        psql -U "$user" -h $server -d "$database_name" -q -f "./scripts/$script" 
+        psql -U "$user" -h $server -d "$database_name" -a -f "./scripts/$script" > "./scripts/output/$script.txt"
     done
 }
 

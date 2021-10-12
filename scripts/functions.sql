@@ -1,5 +1,4 @@
 -- D1
-Create table "user"(user_id varchar, user_name varchar, "password" varchar);
 CREATE EXTENSION pgcrypto;
 create or replace function create_user(user_id varchar, user_name varchar, user_pwd varchar) returns void language plpgsql
 as
@@ -154,11 +153,11 @@ begin
 select TIMEOFDAY() into date_now;
 return query
 select distinct title.title_id, title.primary_title from title
-natural join omdb_data 
+natural join omdb 
 natural join person 
 natural join "character_names" 
 where title.primary_title like '%' || title_ || '%' and 
-omdb_data.plot like '%' || plot_|| '%' and
+omdb.plot like '%' || plot_|| '%' and
 person.person_name like '%' || names_ || '%' and
 "character_names".character_name like '%' || characters_ || '%';
 insert into search_history (user_id, search_string, "date") VALUES (user_id, search_query, date_now);
