@@ -156,11 +156,11 @@ return query
 select distinct title.title_id, title.primary_title from title
 natural join omdb_data 
 natural join person 
-natural join "characters" 
+natural join "character_names" 
 where title.primary_title like '%' || title_ || '%' and 
 omdb_data.plot like '%' || plot_|| '%' and
 person.person_name like '%' || names_ || '%' and
-"characters".character_name like '%' || characters_ || '%';
+"character_names".character_name like '%' || characters_ || '%';
 insert into search_history (user_id, search_string, "date") VALUES (user_id, search_query, date_now);
 end; 
 $$;
@@ -182,7 +182,7 @@ date_now varchar;
 begin
 select TIMEOFDAY() into date_now;
 return query
-select title.primary_title, "characters".character_name from title natural join person natural join "characters" where person.person_name like
+select title.primary_title, "character_names".character_name from title natural join person natural join "character_names" where person.person_name like
 '%' ||  actor_name || '%';
 insert into search_history (user_id, search_string, "date") VALUES (user_id, actor_name, date_now); 
 end;
@@ -199,12 +199,12 @@ $$
 declare 
 r record;
 begin
-	for r in SELECT distinct title_id from person natural join "characters" where person_name = name
+	for r in SELECT distinct title_id from person natural join "character_names" where person_name = name
 	loop
 	return query
 	
 	SELECT person_id, person_name, primary_title
-	from person natural join "characters" natural join title 
+	from person natural join "character_names" natural join title 
 	where title_id = r.title_id
 	group by person_id, primary_title, person_name;
 	end loop;
@@ -244,7 +244,7 @@ declare
 r record;
 begin
 create index h on person(person_name);
-for r in SELECT distinct person_name from person join characters on "characters".person_id=person.person_id join title_rating on "characters".title_id = title_rating.title_id join profession on profession.person_id = "characters".person_id where profession.profession_type = 'actor'
+for r in SELECT distinct person_name from person join character_names on "character_names".person_id=person.person_id join title_rating on "character_names".title_id = title_rating.title_id join profession on profession.person_id = "character_names".person_id where profession.profession_type = 'actor'
 	loop
 	insert into person_rating (person_id, person_name, rating, num_votes)
 		values (
@@ -253,11 +253,11 @@ for r in SELECT distinct person_name from person join characters on "characters"
 			(select person_name from person where person_name = r.person_name limit 1),
 			
 			(select sum(cast(rating_avg as integer))/count(rating_avg)
-					from person join characters on person.person_id = "characters".person_id join title_rating on title_rating.title_id = "characters".title_id 
+					from person join character_names on person.person_id = "character_names".person_id join title_rating on title_rating.title_id = "character_names".title_id 
 					where person_name = r.person_name limit 1),
 					
-			(select sum(cast(votes as integer)) from person join characters on person.person_id = "characters".person_id join title_rating on 
-					title_rating.title_id = "characters".title_id 
+			(select sum(cast(votes as integer)) from person join character_names on person.person_id = "character_names".person_id join title_rating on 
+					title_rating.title_id = "character_names".title_id 
 					where person_name = r.person_name limit 1)
 		);	
 	end loop;
@@ -276,7 +276,7 @@ begin
 
 return query
 
-select rr.person_name, rr.rating from title join "characters" on title.title_id = "characters".title_id join person_rating as rr on rr.person_id = "characters".person_id where title.primary_title like '%' || inputt || '%'
+select rr.person_name, rr.rating from title join "character_names" on title.title_id = "character_names".title_id join person_rating as rr on rr.person_id = "character_names".person_id where title.primary_title like '%' || inputt || '%'
 ORDER BY rating desc;
 
 end;
