@@ -68,7 +68,7 @@ CREATE TABLE public.writer(
 );
 
 CREATE TABLE public.Character_names_temp(
-    character_name varchar(255),
+    character_name varchar(555),
     person_id varchar(255),
     title_id varchar(255)
 );
