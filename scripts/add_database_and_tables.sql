@@ -122,7 +122,6 @@ CREATE TABLE public.user (
     user_name VARCHAR(255),
     password VARCHAR(255)
     );
-CREATE EXTENSION pgcrypto;
 
 CREATE TABLE user_title_rating(
     user_id VARCHAR(255),
