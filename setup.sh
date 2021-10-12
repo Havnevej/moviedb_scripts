@@ -1,13 +1,16 @@
 #!/bin/bash
 
-export PGPASSWORD='postgres'
+#password raw9=AQoKETAs
+#user=raw9
+export PGPASSWORD='AQoKETAs'
+user=postgres
 export PGOPTIONS="-c client_min_messages=error"
 order=('add_database_and_tables.sql' 'add_constraints.sql' 'add_data.sql' 'functions.sql' 'final.sql')
 database_name="imdb"
 server="127.0.0.1"
 
-imdb_small = "imdb_small.backup"
-imdb_large = "imdb_large.backup"
+imdb_small= "imdb_small.backup"
+imdb_large="imdb_large.backup"
 
 if test -f "./scripts/imdb_large.backup.icloud"; then
     imdb_large="./scripts/imdb_large.backup.icloud"
@@ -22,14 +25,14 @@ NC='\033[0m' # No Color
 function setup_databases {
     if [ "$1" != "keep" ]; then 
         echo -e "${RED}dropping imdb database${NC}"
-        psql -U postgres -h $server  "-c drop database $database_name WITH(FORCE);"
+        psql -U "$user" -h $server  "-c drop database $database_name WITH(FORCE);"
         echo -e "${RED}creating imdb database${NC}"
-        psql -U postgres -h $server  "-c create database $database_name"
+        psql -U "$user" -h $server  "-c create database $database_name"
         echo -e "${RED}restoring imdb database from backup${NC}"
         if [ "$1" == "big" ]; then 
-            psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/$imdb_large"
+            psql -U "$user" -h $server  -d "$database_name" -q -f "./scripts/$imdb_large"
         else
-            psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/$imdb_small"
+            psql -U "$user" -h $server  -d "$database_name" -q -f "./scripts/$imdb_small"
         fi
     fi
 }
@@ -37,7 +40,7 @@ function setup_databases {
 function run_scripts {
     for script in "${order[@]}"; do
         echo -e "${RED}running script: $script ${NC}"
-        psql -U postgres -h $server -d "$database_name" -q -f "./scripts/$script" 
+        psql -U "$user" -h $server -d "$database_name" -q -f "./scripts/$script" 
     done
 }
 
