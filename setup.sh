@@ -27,9 +27,9 @@ function setup_databases {
         psql -U postgres -h $server  "-c create database $database_name"
         echo -e "${RED}restoring imdb database from backup${NC}"
         if [ "$1" == "big" ]; then 
-            psql -U postgres -h $server  -d "$database_name" -q -f "$imdb_large"
+            psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/$imdb_large"
         else
-            psql -U postgres -h $server  -d "$database_name" -q -f "$imdb_small"
+            psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/$imdb_small"
         fi
     fi
 }
@@ -45,7 +45,7 @@ if [ "$1" == "only_our" ]; then
     run_scripts
 else
     if [ "$1" == "big" ]; then 
-        if ! test -f "$imdb_large"; then
+        if ! test -f "./scripts/$imdb_large"; then
             brew install wget unzip
             wget https://www.dropbox.com/s/nmh4l73wf79gubi/imdb_large.backup.zip?dl=1 -O "./scripts/large.zip"
             unzip "./scripts/large.zip" -d "./scripts/"
