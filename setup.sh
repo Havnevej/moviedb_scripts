@@ -18,7 +18,7 @@ function setup_databases {
             psql -U postgres -h $server  "-c create database $database_name"
             echo -e "${RED}restoring imdb database from backup${NC}"
             if [ "$1" == "big" ]; then 
-                psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_big.backup"
+                psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_large.backup"
             else
                 psql -U postgres -h $server  -d "$database_name" -q -f "./scripts/imdb_small.backup"
             fi
