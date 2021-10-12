@@ -47,7 +47,7 @@ ALTER TABLE ONLY public.Person_rating
     ADD CONSTRAINT person_rating_pkey PRIMARY KEY (person_id);
 
 ALTER TABLE ONLY public.User
-    ADD CONSTRAINT person_rating_pkey PRIMARY KEY (user_id);
+    ADD CONSTRAINT user_pkey PRIMARY KEY (user_id);
 
 ALTER TABLE ONLY public.User_title_rating
     ADD CONSTRAINT user_title_rating_pkey PRIMARY KEY (user_id);
