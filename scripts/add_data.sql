@@ -56,7 +56,7 @@ FROM "public".omdb_data;
 
 --Principals
 INSERT INTO public.principals ("title_id", "ordering","person_id","category", "job") 
-SELECT tconst, ordering, nconst, category, job
+SELECT DISTINCT on ("tconst", "ordering") tconst, ordering, nconst, category, job
 FROM "public".title_principals;
 
 /*

@@ -1,10 +1,12 @@
+########################################Setup
 $PSQL=""
 $env:PGPASSWORD='postgres'
 $user="postgres"
 $env:PGOPTIONS="-c client_min_messages=error"
-$order = @("add_database_and_tables.sql", "add_constraints.sql", "add_data.sql", "functions.sql", "final.sql")
+$order = @("add_database_and_tables.sql", "add_constraints.sql", "add_data.sql", "functions_with_test.sql", "final.sql")
 $database_name = "imdb"
 $server = "127.0.0.1"
+$ErrorActionPreference = "Stop"
 
 if(Test-Path -Path "C:\Program Files\PostgreSQL\13\bin\psql.exe"){
     Write-Host "Using psql ver. 13"
@@ -15,6 +17,8 @@ if(Test-Path -Path "C:\Program Files\PostgreSQL\13\bin\psql.exe"){
 } elseif (Get-Command "psql" -errorAction SilentlyContinue){
     $PSQL="psql"
 }
+New-Item -ItemType Directory -Force -Path "./scripts/output/"
+##########################################Code
 
 function setup_databases{
     Write-Host "dropping imdb database" -ForegroundColor red
@@ -33,13 +37,19 @@ function run_scripts{
     Write-Host "[$order]"  -ForegroundColor yellow
     foreach ($script in $order) {
         Write-Host "running $script" -ForegroundColor red
-        & $PSQL -U $user -h $server -d "$database_name" -q -f "./scripts/$script" 
+        & $PSQL -U $user -h $server -d "$database_name" -a -f "./scripts/$script" >> "./scripts/output/$script.txt"
     }
 }
 if($args[0] -eq "ours_only"){
     run_scripts
 } else {
     if($args[0] -eq "big"){
+        if(-Not (Test-Path -Path "./scripts/imdb_large.backup" -PathType Leaf)){
+            $ProgressPreference = 'SilentlyContinue'
+            Invoke-WebRequest -Uri "https://www.dropbox.com/s/nmh4l73wf79gubi/imdb_large.backup.zip?dl=1" -OutFile "./scripts/large.zip"
+            Expand-Archive -LiteralPath "./scripts/large.zip" -DestinationPath "./scripts/"
+            Remove-Item "./scripts/large.zip"
+        }
         setup_databases big
     } else {
         setup_databases

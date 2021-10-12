@@ -2,6 +2,7 @@
 
 #password raw9=AQoKETAs
 #user=raw9
+set -e
 export PGPASSWORD='AQoKETAs'
 user=postgres
 export PGOPTIONS="-c client_min_messages=error"

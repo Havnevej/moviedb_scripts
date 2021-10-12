@@ -239,35 +239,66 @@ order by countt desc limit 3;*/
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- D7
+
 create or replace function person_rate2() returns void language plpgsql as
 $$
 declare 
 r record;
+r2 record;
+weight float :=0;
+counter float :=1;
+
 begin
 create index h on person(person_name);
-for r in SELECT distinct person_name from person join character_names on "character_names".person_id=person.person_id join title_rating on "character_names".title_id = title_rating.title_id join profession on profession.person_id = "character_names".person_id where profession.profession_type = 'actor'
+for r in SELECT distinct person_name from person join characters on "characters".person_id=person.person_id join title_rating on "characters".title_id = title_rating.title_id join profession on profession.person_id = "characters".person_id where profession.profession_type = 'actor'
 	loop
-	insert into person_rating (person_id, person_name, rating, num_votes)
+	weight:=1;
+	counter:=1;
+		for r2 in SELECT cast(votes as integer) from person join characters on 
+				person.person_id = "characters".person_id join title_rating on 
+				title_rating.title_id = "characters".title_id 
+				where person_name = r.person_name
+		loop
+					if 
+						cast(r2.votes as integer) > 1000 then 
+						weight:= weight + 1.2;
+						else
+						weight:= weight + 1;
+						end if;
+						counter:= counter + 1;
+		end loop;
+	
+	insert into person_rating (person_id, person_name, weight, rating, num_votes)
 		values (
+			--person_id
 			(select person_id from person where person_name = r.person_name limit 1),
-			
+			--person_name
 			(select person_name from person where person_name = r.person_name limit 1),
 			
+			--weight
+			(weight/counter),
+			
+			--rating
 			(select sum(cast(rating_avg as integer))/count(rating_avg)
-					from person join character_names on person.person_id = "character_names".person_id join title_rating on title_rating.title_id = "character_names".title_id 
-					where person_name = r.person_name limit 1),
-					
-			(select sum(cast(votes as integer)) from person join character_names on person.person_id = "character_names".person_id join title_rating on 
-					title_rating.title_id = "character_names".title_id 
-					where person_name = r.person_name limit 1)
+					from person join characters on person.person_id = "characters".person_id join title_rating on title_rating.title_id =   
+					"characters".title_id 
+					where person_name = r.person_name),
+			
+			 
+			--num_votes		
+			(select sum(cast(votes as integer)) from person join characters on person.person_id = "characters".person_id join title_rating on 
+					title_rating.title_id = "characters".title_id 
+					where person_name = r.person_name)
 		);	
 	end loop;
+update person_rating set rating = rating*person_rating.weight where person_rating.weight > 1;
+update person_rating set rating = 10 where rating > 10;
+alter table person_rating drop column weight; 
 end;
 $$;
 
-select person_rate2();
+select person_rate2(); 
 
-if num_votes > 100000 * 1.2
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- D8
