@@ -57,17 +57,18 @@ CREATE TABLE public.Title(
     run_time_minutes int4
 );
 
-CREATE TABLE public.Crew(
+CREATE TABLE public.Director(
     title_id varchar(255),
-    person_id varchar(255),
-    primary_profession varchar(255),
-    additional_profession varchar(255),
-    is_principal boolean,
-    ordering int4
+    director_id varchar(255)
+);
+
+CREATE TABLE public.Writer(
+    title_id varchar(255),
+    writer_id varchar(255)
 );
 
 CREATE TABLE public.Character_names_temp(
-    character_name varchar(255),
+    character_name varchar(555),
     person_id varchar(255),
     title_id varchar(255)
 );
@@ -106,6 +107,44 @@ CREATE TABLE public.Principals (
     category VARCHAR(255),
     job VARCHAR(255)
 );
+
+-- CREATE Tables user (C framework)
+
+CREATE TABLE person_rating (
+    person_id VARCHAR(255), 
+    person_name VARCHAR(255), 
+    weight float,
+    rating BIGINT, 
+    num_votes BIGINT
+    );
+
+CREATE TABLE public.user (
+    user_id VARCHAR(255),
+    user_name VARCHAR(255),
+    password VARCHAR(255)
+    );
+
+CREATE TABLE user_title_rating(
+    user_id VARCHAR(255),
+    title_id VARCHAR(255),
+    rating VARCHAR(255)
+    );
+
+CREATE TABLE bookmark_title(
+    user_id VARCHAR(255),
+    title_id VARCHAR(255)
+    );
+
+CREATE TABLE bookmark_person(
+    user_id VARCHAR(255),
+    person_id VARCHAR(255)
+    );
+
+CREATE TABLE search_history(
+    user_id VARCHAR(255),
+    search_string VARCHAR(255),
+    date VARCHAR(255)
+    );
 
 
 /*

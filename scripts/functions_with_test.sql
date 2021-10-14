@@ -8,10 +8,10 @@ begin
 end;
 $$;
 --Create user
---select create_user('3', 'Larry', 'CatsAndDogs1234');
+select create_user('3', 'Larry', 'CatsAndDogs1234');
 
 --Authentication:
---SELECT * from "user" where "user".password = crypt('CatsAndDogs1234', password);
+SELECT * from "user" where "user".password = crypt('CatsAndDogs1234', password);
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ delete from "user" * where user_name = u_name and password = crypt(u_pwd, passwo
 end;
 $$;
 
---SELECT delete_user('Larry','CatsAndDogs1234');
+SELECT delete_user('Larry','CatsAndDogs1234');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ update "user" set user_name = new_uname where user_name = u_name and password = 
 end;
 $$;
 
---SELECT update_user('Larry', 'CatsAndDogs1234', 'John');
+SELECT update_user('Larry', 'CatsAndDogs1234', 'John');
 
 -----------------------------------------------------------------------------------------------------------------------------
 --create functions for user_rating, bookmarks
@@ -83,7 +83,7 @@ where Title.primary_title like '%' || string || '%';
 end; 
 $$; 
 
---select string_search('Parasite'); 
+select string_search('Parasite'); 
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -113,7 +113,7 @@ $$
 	end; 
 $$; 
 
---select string_search('Parasite', '21');
+select string_search('Parasite', '21');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -134,7 +134,7 @@ end;
 $$;
 
 --test query:
---select user_rate_title ('55', 'tt0108549 ', '10');
+select user_rate_title ('55', 'tt0108549 ', '10');
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- D4
@@ -153,18 +153,18 @@ begin
 select TIMEOFDAY() into date_now;
 return query
 select distinct title.title_id, title.primary_title from title
-natural join omdb 
+natural join omdb_data 
 natural join person 
 natural join "character_names" 
 where title.primary_title like '%' || title_ || '%' and 
-omdb.plot like '%' || plot_|| '%' and
+omdb_data.plot like '%' || plot_|| '%' and
 person.person_name like '%' || names_ || '%' and
 "character_names".character_name like '%' || characters_ || '%';
 insert into search_history (user_id, search_string, "date") VALUES (user_id, search_query, date_now);
 end; 
 $$;
 
---select structured_string_search('Parasite', '', '', '', '12');
+select structured_string_search('Parasite', '', '', '', '12');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -187,7 +187,8 @@ insert into search_history (user_id, search_string, "date") VALUES (user_id, act
 end;
 $$;
 
---select * from search_by_actor_name('Daniel', '22');
+select * from search_by_actor_name('Daniel', '22');
+
 
 -----------------------------------------------------------------------------------------------------------------------------
 -- D6
@@ -225,7 +226,7 @@ order by countt desc limit limitt;
 end;
 $$;
 
---select c_id as actor_id, c_name as actor_name, countt as frequency from m_freq_co_worker('Daniel Craig', 10)
+select c_id as actor_id, c_name as actor_name, countt as frequency from m_freq_co_worker('Daniel Craig', 10);
 
 
 --TEST QUERY
@@ -247,13 +248,13 @@ counter float :=1;
 
 begin
 create index h on person(person_name);
-for r in SELECT distinct person_name from person join characters on "characters".person_id=person.person_id join title_rating on "characters".title_id = title_rating.title_id join profession on profession.person_id = "characters".person_id where profession.profession_type = 'actor'
+for r in SELECT distinct person_name from person join character_names on "character_names".person_id=person.person_id join title_rating on "character_names".title_id = title_rating.title_id join profession on profession.person_id = "character_names".person_id where profession.profession_type = 'actor'
 	loop
 	weight:=1;
 	counter:=1;
-		for r2 in SELECT cast(votes as integer) from person join characters on 
-				person.person_id = "characters".person_id join title_rating on 
-				title_rating.title_id = "characters".title_id 
+		for r2 in SELECT cast(votes as integer) from person join character_names on 
+				person.person_id = "character_names".person_id join title_rating on 
+				title_rating.title_id = "character_names".title_id 
 				where person_name = r.person_name
 		loop
 					if 
@@ -277,14 +278,14 @@ for r in SELECT distinct person_name from person join characters on "characters"
 			
 			--rating
 			(select sum(cast(rating_avg as integer))/count(rating_avg)
-					from person join characters on person.person_id = "characters".person_id join title_rating on title_rating.title_id =   
-					"characters".title_id 
+					from person join character_names on person.person_id = "character_names".person_id join title_rating on title_rating.title_id =   
+					"character_names".title_id 
 					where person_name = r.person_name),
 			
 			 
 			--num_votes		
-			(select sum(cast(votes as integer)) from person join characters on person.person_id = "characters".person_id join title_rating on 
-					title_rating.title_id = "characters".title_id 
+			(select sum(cast(votes as integer)) from person join character_names on person.person_id = "character_names".person_id join title_rating on 
+					title_rating.title_id = "character_names".title_id 
 					where person_name = r.person_name)
 		);	
 	end loop;
@@ -294,7 +295,8 @@ alter table person_rating drop column weight;
 end;
 $$;
 
---select person_rate2(); 
+select person_rate2(); 
+
 -----------------------------------------------------------------------------------------------------------------------------
 
 -- D8
@@ -328,7 +330,7 @@ desc;
 end;
 $$;
 
---select * from co_actor_popularity('Daniel Craig');
+select * from co_actor_popularity('Daniel Craig');
 
 
 -----------------------------------------------------------------------------------------------------------------------------
@@ -353,7 +355,7 @@ select  s.title_id, s.primary_title, f.genre_name from genre as f join title as 
 end;
 $$;
 
---select * from similar_titles ('Casino Royale');
+select * from similar_titles ('Casino Royale');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -377,7 +379,7 @@ WHERE t.title_id=w.title_id;
 end;
 $$;
 
---SELECT * from exact_match('apple', 'mads', 'mikkelsen');
+SELECT * from exact_match('apple', 'mads', 'mikkelsen');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -400,7 +402,7 @@ GROUP BY t.title_id, primary_title ORDER BY rank DESC limit 10;
 end;
 $$;
 
---SELECT * FROM best_match('apple','mads','mikkelsen');
+SELECT * FROM best_match('apple','mads','mikkelsen');
 
 -----------------------------------------------------------------------------------------------------------------------------
 
@@ -422,4 +424,4 @@ end loop;
 end;
 $$;
 
---SELECT * from word_to_word('olivia', 'jim', 'corin') order by rank desc; 
+SELECT * from word_to_word('olivia', 'jim', 'corin') order by rank desc; 

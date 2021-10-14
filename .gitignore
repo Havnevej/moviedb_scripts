@@ -1,2 +1,5 @@
 our_datebase2.sql
-*.backups
+*.backup
+*.icloud
+*.txt
+*.zip
