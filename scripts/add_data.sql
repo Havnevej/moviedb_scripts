@@ -60,17 +60,42 @@ SELECT DISTINCT on ("tconst", "ordering") tconst, ordering, nconst, category, jo
 FROM "public".title_principals;
 
 --Title_version
-INSERT INTO public.Title_versions ("title_id", "version", "title_name", "region","language", "types", "attributes", "is_original_title") 
+INSERT INTO public.Title_versions ("title_id", "title_version", "title_name", "region","language", "types", "attributes", "is_original_title") 
 SELECT DISTINCT on ("titleid", "ordering") title, region, "language", types, attributes, is_original_title
 FROM "public".title_akas;
 
---Director 
-INSERT INTO public.director("title_id", "director_id")
-SELECT tconst, unnest(string_to_array(directors, ',')) 
-FROM title_crew;
-
 --Writer 
-INSERT INTO public.writer("title_id", "writer_id")
-SELECT tconst, unnest(string_to_array(writers, ',')) 
+INSERT INTO public.writer(title_id, writer_id)
+SELECT 
+	DISTINCT on (tconst, unnest(string_to_array(writers, ',')))
+		tconst, unnest(string_to_array(writers, ',')))
+FROM title_crew;
+ALTER TABLE "public".Writer_temp
+RENAME TO Writer;
+
+--Director
+INSERT INTO public.director(title_id, director_id)
+SELECT 
+	DISTINCT on (tconst, unnest(string_to_array(directors, ',')))
+		tconst, unnest(string_to_array(directors, ',')))
+FROM title_crew;
+ALTER TABLE "public".Director_temp
+RENAME TO Director;
+
+
+/*
+--Director 
+INSERT INTO public.Director_temp("title_id", "director_id")
+SELECT (tconst, unnest(string_to_array(directors, ','))) 
 FROM title_crew;
 
+INSERT INTO "public".character_names_temp (person_id, title_id, character_name)
+SELECT 
+	DISTINCT on (nconst, tconst, unnest(string_to_array(characters, ',')))
+		nconst, tconst, unnest(string_to_array(characters, ','))
+FROM "public".title_principals;
+--DROP TABLE "public".character_names;
+ALTER TABLE "public".character_names_temp
+RENAME TO character_names;
+
+*/

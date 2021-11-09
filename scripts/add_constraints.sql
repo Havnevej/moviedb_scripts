@@ -4,10 +4,10 @@ ALTER TABLE ONLY public.omdb
 ALTER TABLE ONLY public.word_index
     ADD CONSTRAINT word_index_pkey PRIMARY KEY (title_id, word, field);
 
-ALTER TABLE ONLY public.director
+ALTER TABLE ONLY public.Director_temp
     ADD CONSTRAINT director_pkey PRIMARY KEY (director_id, title_id);
 
-ALTER TABLE ONLY public.writer
+ALTER TABLE ONLY public.Writer_temp
     ADD CONSTRAINT writer_pkey PRIMARY KEY (writer_id, title_id);
 
 ALTER TABLE ONLY public.character_names_temp

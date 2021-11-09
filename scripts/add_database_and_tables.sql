@@ -42,12 +42,12 @@ CREATE TABLE public.Title(
     run_time_minutes int4
 );
 
-CREATE TABLE public.Director(
+CREATE TABLE public.Director_temp(
     title_id varchar(255),
     director_id varchar(255)
 );
 
-CREATE TABLE public.Writer(
+CREATE TABLE public.Writer_temp(
     title_id varchar(255),
     writer_id varchar(255)
 );
