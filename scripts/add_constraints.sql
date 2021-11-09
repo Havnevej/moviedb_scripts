@@ -56,7 +56,7 @@ ALTER TABLE ONLY public.Bookmark_title
     ADD CONSTRAINT bookmark_title_pkey PRIMARY KEY (user_id);
 
 ALTER TABLE ONLY public.Bookmark_person
-    ADD CONSTRAINT bookmark_person_pkey PRIMARY KEY (user_id);
+    ADD CONSTRAINT bookmark_person_pkey PRIMARY KEY (user_id, person_id);
 
 ALTER TABLE ONLY public.Search_history
     ADD CONSTRAINT search_history_pkey PRIMARY KEY (user_id);
