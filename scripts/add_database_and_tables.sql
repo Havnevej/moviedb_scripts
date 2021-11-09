@@ -1,4 +1,3 @@
-
 CREATE TABLE public.Person (
     person_id varchar(255),
     person_name varchar(255),
@@ -131,7 +130,3 @@ CREATE TABLE search_history(
     search_string VARCHAR(255),
     date VARCHAR(255)
     );
-
-
-
-*/
