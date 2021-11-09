@@ -16,13 +16,8 @@ FROM "public".title_ratings;
 
 --Omdb
 INSERT INTO public.omdb ("title_id", "poster","awards","plot") 
-SELECT DISTINCT on ("tconst") "tconst", "poster","awards","plot"
+SELECT DISTINCT on ("tconst") tconst, poster, awards, plot
 FROM "public".omdb_data;
-
---Known_for_titles
-INSERT INTO "public".Known_for_titles (person_id, title_id) 
-SELECT nconst, unnest(string_to_array(knownfortitles, ','))
-FROM name_basics;
 
 --Word_index,wi
 INSERT INTO public.Word_index("title_id", "word", "field", "lexeme")
@@ -81,6 +76,12 @@ SELECT
 FROM title_crew;
 ALTER TABLE "public".Director_temp
 RENAME TO Director;
+
+--Known_for_titles
+INSERT INTO "public".Known_for_titles (person_id, title_id) 
+SELECT nconst, unnest(string_to_array(knownfortitles, ','))
+FROM name_basics;
+
 
 
 /*
