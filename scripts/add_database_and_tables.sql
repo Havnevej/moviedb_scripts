@@ -23,7 +23,7 @@ CREATE TABLE public.Title_versions (
     language varchar(255),
     types varchar(255),
     attributes varchar(255),
-    is_original_title boolean
+    is_original_title varchar(255)
 );
 
 CREATE TABLE public.Genre(
