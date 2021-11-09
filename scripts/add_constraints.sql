@@ -62,4 +62,4 @@ ALTER TABLE ONLY public.Search_history
     ADD CONSTRAINT search_history_pkey PRIMARY KEY (user_id, date);
 
 ALTER TABLE ONLY public.Comment
-    ADD CONSTRAINT comment_pkey PRIMARY KEY (user_id, title_id);
+    ADD CONSTRAINT comment_pkey PRIMARY KEY (user_id, date);
