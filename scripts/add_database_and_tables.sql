@@ -73,7 +73,7 @@ CREATE TABLE public.Episodes(
 
 CREATE TABLE public.Omdb (
     title_id varchar(255) NOT NULL,
-    poster character varying(256),
+    poster varchar(255),
     awards text,
     plot text
 );
@@ -121,7 +121,7 @@ CREATE TABLE bookmark_title(
     );
 
 CREATE TABLE bookmark_person(
-    user_id VARCHAR(255),
+    user_id VARCHAR(255)
     person_id VARCHAR(255)
     );
 
