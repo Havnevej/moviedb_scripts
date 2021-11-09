@@ -68,7 +68,7 @@ FROM "public".title_akas;
 INSERT INTO public.writer(title_id, writer_id)
 SELECT 
 	DISTINCT on (tconst, unnest(string_to_array(writers, ',')))
-		tconst, unnest(string_to_array(writers, ',')))
+		tconst, unnest(string_to_array(writers, ','))
 FROM title_crew;
 ALTER TABLE "public".Writer_temp
 RENAME TO Writer;
@@ -77,7 +77,7 @@ RENAME TO Writer;
 INSERT INTO public.director(title_id, director_id)
 SELECT 
 	DISTINCT on (tconst, unnest(string_to_array(directors, ',')))
-		tconst, unnest(string_to_array(directors, ',')))
+		tconst, unnest(string_to_array(directors, ','))
 FROM title_crew;
 ALTER TABLE "public".Director_temp
 RENAME TO Director;
