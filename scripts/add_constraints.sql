@@ -4,10 +4,10 @@ ALTER TABLE ONLY public.omdb
 ALTER TABLE ONLY public.word_index
     ADD CONSTRAINT word_index_pkey PRIMARY KEY (title_id, word, field);
 
-ALTER TABLE ONLY public.director
+ALTER TABLE ONLY public.Director_temp
     ADD CONSTRAINT director_pkey PRIMARY KEY (director_id, title_id);
 
-ALTER TABLE ONLY public.writer
+ALTER TABLE ONLY public.Writer_temp
     ADD CONSTRAINT writer_pkey PRIMARY KEY (writer_id, title_id);
 
 ALTER TABLE ONLY public.character_names_temp
@@ -60,15 +60,3 @@ ALTER TABLE ONLY public.Bookmark_person
 
 ALTER TABLE ONLY public.Search_history
     ADD CONSTRAINT search_history_pkey PRIMARY KEY (user_id);
-
-/*
-ALTER TABLE ONLY public.Genre_key
-    ADD CONSTRAINT genre_key_pkey PRIMARY KEY (title_id);
-
-ALTER TABLE ONLY public.Known_for_titles_key
-    ADD CONSTRAINT Known_for_titles_key_pkey PRIMARY KEY (person_id, k_id);
-
-ALTER TABLE ONLY public.Profession_key
-    ADD CONSTRAINT profession_key_pkey PRIMARY KEY (person_id,profession_id);
-
-*/

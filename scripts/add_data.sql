@@ -59,18 +59,43 @@ INSERT INTO public.principals ("title_id", "ordering","person_id","category", "j
 SELECT DISTINCT on ("tconst", "ordering") tconst, ordering, nconst, category, job
 FROM "public".title_principals;
 
+--Title_version
+INSERT INTO public.Title_versions ("title_id", "title_version", "title_name", "region","language", "types", "attributes", "is_original_title") 
+SELECT DISTINCT on ("titleid", "ordering") title, region, "language", types, attributes, isoriginaltitle
+FROM "public".title_akas;
+
+--Writer 
+INSERT INTO public.Writer_temp(title_id, writer_id)
+SELECT 
+	DISTINCT on (tconst, unnest(string_to_array(writers, ',')))
+		tconst, unnest(string_to_array(writers, ','))
+FROM title_crew;
+ALTER TABLE "public".Writer_temp
+RENAME TO Writer;
+
+--Director
+INSERT INTO public.Director_temp(title_id, director_id)
+SELECT 
+	DISTINCT on (tconst, unnest(string_to_array(directors, ',')))
+		tconst, unnest(string_to_array(directors, ','))
+FROM title_crew;
+ALTER TABLE "public".Director_temp
+RENAME TO Director;
+
+
 /*
--- Genre key
-INSERT INTO public.genre_key("title_id", "genre_id")
-SELECT "tconst", "genre_id"
-FROM "public".title, "public".genre
+--Director 
+INSERT INTO public.Director_temp("title_id", "director_id")
+SELECT (tconst, unnest(string_to_array(directors, ','))) 
+FROM title_crew;
 
--- Profession key
-INSERT INTO public.profession_key("person_id", "profession_id")
-SELECT unnest(string_to_array(primaryprofession, ',')), nconst 
-FROM name_basics
+INSERT INTO "public".character_names_temp (person_id, title_id, character_name)
+SELECT 
+	DISTINCT on (nconst, tconst, unnest(string_to_array(characters, ',')))
+		nconst, tconst, unnest(string_to_array(characters, ','))
+FROM "public".title_principals;
+--DROP TABLE "public".character_names;
+ALTER TABLE "public".character_names_temp
+RENAME TO character_names;
 
--- Known_for_tiles_key  = not implementet
 */
-
-

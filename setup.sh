@@ -2,8 +2,7 @@
 
 #password raw9=AQoKETAs
 #user=raw9
-set -e
-export PGPASSWORD='AQoKETAs'
+export PGPASSWORD='postgres'
 user=postgres
 export PGOPTIONS="-c client_min_messages=error"
 order=('add_database_and_tables.sql' 'add_constraints.sql' 'add_data.sql' 'functions.sql' 'final.sql')
