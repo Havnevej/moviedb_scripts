@@ -16,13 +16,13 @@ CREATE TABLE public.Known_for_titles (
 );
 
 CREATE TABLE public.Title_versions (
-    title_id varchar(255),
+    title_id varchar(1024),
     title_version varchar(255),
     title_name varchar(255),
     region varchar(255),
     language varchar(255),
     types varchar(255),
-    attributes varchar(255),
+    attributes varchar(1024),
     is_original_title varchar(255)
 );
 
