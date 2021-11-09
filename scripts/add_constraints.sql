@@ -13,12 +13,12 @@ ALTER TABLE ONLY public.Writer_temp
 ALTER TABLE ONLY public.character_names_temp
     ADD CONSTRAINT character_names_pkey PRIMARY KEY (person_id, title_id, character_name);
 
+ALTER TABLE ONLY public.Title
+    ADD CONSTRAINT title_pkey PRIMARY KEY (title_id);
+
 ALTER TABLE ONLY public.Title_rating
     ADD CONSTRAINT title_rating_pkey PRIMARY KEY (title_id),
     ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
-
-ALTER TABLE ONLY public.Title
-    ADD CONSTRAINT title_pkey PRIMARY KEY (title_id);
 
 ALTER TABLE ONLY public.Person
     ADD CONSTRAINT person_pkey PRIMARY KEY (person_id);
@@ -29,7 +29,7 @@ ALTER TABLE ONLY public.Profession
 ALTER TABLE ONLY public.Known_for_titles
     ADD CONSTRAINT known_for_titles_pkey PRIMARY KEY (person_id, title_id),
     ADD CONSTRAINT known_for_titles_fk FOREIGN KEY(title_id) REFERENCES title(title_id),
-    ADD CONSTRAINT known_for_titles_fk FOREIGN KEY(person_id) REFERENCES Person(person_id);
+    ADD CONSTRAINT known_for_titles_p_fk FOREIGN KEY(person_id) REFERENCES Person(person_id);
 
 ALTER TABLE ONLY public.Title_versions
     ADD CONSTRAINT Title_versions_pkey PRIMARY KEY (title_id,title_version);
