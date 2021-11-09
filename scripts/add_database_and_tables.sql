@@ -1,17 +1,3 @@
-/*
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-SET default_tablespace = '';
-SET default_table_access_method = heap;
-*/
 
 CREATE TABLE public.Person (
     person_id varchar(255),
@@ -147,20 +133,5 @@ CREATE TABLE search_history(
     );
 
 
-/*
-CREATE TABLE public.Genre_key(
-    title_id varchar(255),
-    genre_id varchar(255)
-);
-
-CREATE TABLE public.Profession_key(
-    person_id varchar(255),
-    profession_id varchar(255)
-);
-
-CREATE TABLE public.Known_for_titles_key (
-    person_id varchar(255),
-    k_id varchar(255)
-);
 
 */

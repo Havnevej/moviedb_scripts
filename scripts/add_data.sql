@@ -59,18 +59,18 @@ INSERT INTO public.principals ("title_id", "ordering","person_id","category", "j
 SELECT DISTINCT on ("tconst", "ordering") tconst, ordering, nconst, category, job
 FROM "public".title_principals;
 
-/*
--- Genre key
-INSERT INTO public.genre_key("title_id", "genre_id")
-SELECT "tconst", "genre_id"
-FROM "public".title, "public".genre
+--Title_version
+INSERT INTO public.Title_versions ("title_id", "version", "title_name", "region","language", "types", "attributes", "is_original_title") 
+SELECT DISTINCT on ("titleid", "ordering") title, region, "language", types, attributes, is_original_title
+FROM "public".title_akas;
 
--- Profession key
-INSERT INTO public.profession_key("person_id", "profession_id")
-SELECT unnest(string_to_array(primaryprofession, ',')), nconst 
-FROM name_basics
+--Director 
+INSERT INTO public.director("title_id", "director_id")
+SELECT tconst, unnest(string_to_array(directors, ',')) 
+FROM title_crew;
 
--- Known_for_tiles_key  = not implementet
-*/
-
+--Writer 
+INSERT INTO public.writer("title_id", "writer_id")
+SELECT tconst, unnest(string_to_array(writers, ',')) 
+FROM title_crew;
 

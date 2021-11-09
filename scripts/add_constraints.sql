@@ -60,15 +60,3 @@ ALTER TABLE ONLY public.Bookmark_person
 
 ALTER TABLE ONLY public.Search_history
     ADD CONSTRAINT search_history_pkey PRIMARY KEY (user_id);
-
-/*
-ALTER TABLE ONLY public.Genre_key
-    ADD CONSTRAINT genre_key_pkey PRIMARY KEY (title_id);
-
-ALTER TABLE ONLY public.Known_for_titles_key
-    ADD CONSTRAINT Known_for_titles_key_pkey PRIMARY KEY (person_id, k_id);
-
-ALTER TABLE ONLY public.Profession_key
-    ADD CONSTRAINT profession_key_pkey PRIMARY KEY (person_id,profession_id);
-
-*/
