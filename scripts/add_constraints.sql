@@ -1,3 +1,4 @@
+
 ALTER TABLE ONLY public.omdb
     ADD CONSTRAINT omdb_pkey PRIMARY KEY (title_id);
 
@@ -34,15 +35,24 @@ ALTER TABLE ONLY public.Known_for_titles
 ALTER TABLE ONLY public.Title_versions
     ADD CONSTRAINT Title_versions_pkey PRIMARY KEY (title_id,title_version);
 
-ALTER TABLE ONLY public.Genre
-    ADD CONSTRAINT genre_pkey PRIMARY KEY (title_id, genre_name),
-    ADD CONSTRAINT genre_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
 
 ALTER TABLE ONLY public.Episodes
     ADD CONSTRAINT episodes_pkey PRIMARY KEY (parent_title_id, title_id);
 
 ALTER TABLE ONLY public.Principals
     ADD CONSTRAINT principals_pkey PRIMARY KEY (title_id, ordering);
+
+
+ALTER TABLE ONLY public.Genre
+    ADD CONSTRAINT genre_pkey PRIMARY KEY (title_id, genre_name),
+    ADD CONSTRAINT genre_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
+
+
+--Setting the foreignkeys
+
+
+
+
 
 
 --Setting constraints for user (c framework)

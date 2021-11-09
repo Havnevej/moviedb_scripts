@@ -4,10 +4,20 @@ INSERT INTO public.Title("title_id", "title_type", "original_title",
 SELECT DISTINCT on ("tconst") "tconst","titletype","originaltitle","primarytitle","isadult","startyear","endyear","runtimeminutes"
 FROM "public".title_basics; 
 
+--Title_version
+INSERT INTO public.Title_versions ("title_id", "title_version", "title_name", "region","language", "types", "attributes", "is_original_title") 
+SELECT DISTINCT on ("titleid", "ordering") titleid, ordering, title, region, language, types, attributes, isoriginaltitle
+FROM "public".title_akas;
+
 --Title_rating,title_ratings
 INSERT INTO public.Title_rating("title_id", "rating_avg", "votes")
 SELECT DISTINCT on ("tconst") "tconst", "averagerating", "numvotes"
 FROM "public".title_ratings;
+
+--Known_for_titles
+INSERT INTO "public".Known_for_titles (person_id, title_id) 
+SELECT nconst, unnest(string_to_array(knownfortitles, ','))
+FROM name_basics;
 
 --Word_index,wi
 INSERT INTO public.Word_index("title_id", "word", "field", "lexeme")
@@ -34,11 +44,6 @@ INSERT INTO public.Profession("person_id", "profession_type")
 SELECT nconst, unnest(string_to_array(primaryprofession, ',')) 
 FROM name_basics;
 
---Known_for_titles
-INSERT INTO "public".Known_for_titles (person_id, title_id) 
-SELECT nconst, unnest(string_to_array(knownfortitles, ','))
-FROM name_basics;
-
 --Character_names
 INSERT INTO "public".character_names_temp (person_id, title_id, character_name)
 SELECT 
@@ -58,11 +63,6 @@ FROM "public".omdb_data;
 INSERT INTO public.principals ("title_id", "ordering","person_id","category", "job") 
 SELECT DISTINCT on ("tconst", "ordering") tconst, ordering, nconst, category, job
 FROM "public".title_principals;
-
---Title_version
-INSERT INTO public.Title_versions ("title_id", "title_version", "title_name", "region","language", "types", "attributes", "is_original_title") 
-SELECT DISTINCT on ("titleid", "ordering") titleid, ordering, title, region, language, types, attributes, isoriginaltitle
-FROM "public".title_akas;
 
 --Writer 
 INSERT INTO public.Writer_temp(title_id, writer_id)
