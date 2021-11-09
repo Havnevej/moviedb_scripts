@@ -14,6 +14,11 @@ INSERT INTO public.Title_rating("title_id", "rating_avg", "votes")
 SELECT DISTINCT on ("tconst") "tconst", "averagerating", "numvotes"
 FROM "public".title_ratings;
 
+--Omdb
+INSERT INTO public.omdb ("title_id", "poster","awards","plot") 
+SELECT DISTINCT on ("tconst") "tconst", "poster","awards","plot"
+FROM "public".omdb_data;
+
 --Known_for_titles
 INSERT INTO "public".Known_for_titles (person_id, title_id) 
 SELECT nconst, unnest(string_to_array(knownfortitles, ','))
@@ -53,11 +58,6 @@ FROM "public".title_principals;
 --DROP TABLE "public".character_names;
 ALTER TABLE "public".character_names_temp
 RENAME TO character_names;
-
---Omdb
-INSERT INTO public.omdb ("title_id", "poster","awards","plot") 
-SELECT DISTINCT on ("tconst") "tconst", "poster","awards","plot"
-FROM "public".omdb_data;
 
 --Principals
 INSERT INTO public.principals ("title_id", "ordering","person_id","category", "job") 

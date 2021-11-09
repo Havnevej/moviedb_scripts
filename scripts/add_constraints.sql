@@ -1,7 +1,4 @@
 
-ALTER TABLE ONLY public.omdb
-    ADD CONSTRAINT omdb_pkey PRIMARY KEY (title_id);
-
 ALTER TABLE ONLY public.word_index
     ADD CONSTRAINT word_index_pkey PRIMARY KEY (title_id, word, field);
 
@@ -42,6 +39,8 @@ ALTER TABLE ONLY public.Episodes
 ALTER TABLE ONLY public.Principals
     ADD CONSTRAINT principals_pkey PRIMARY KEY (title_id, ordering);
 
+ALTER TABLE ONLY public.omdb
+    ADD CONSTRAINT omdb_pkey PRIMARY KEY (title_id);
 
 ALTER TABLE ONLY public.Genre
     ADD CONSTRAINT genre_pkey PRIMARY KEY (title_id, genre_name),
