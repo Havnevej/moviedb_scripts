@@ -61,7 +61,7 @@ FROM "public".title_principals;
 
 --Title_version
 INSERT INTO public.Title_versions ("title_id", "title_version", "title_name", "region","language", "types", "attributes", "is_original_title") 
-SELECT DISTINCT on ("titleid", "ordering") title, region, "language", types, attributes, isoriginaltitle
+SELECT DISTINCT on ("titleid", "ordering") titleid, ordering, title, region, "language", types, attributes, isoriginaltitle
 FROM "public".title_akas;
 
 --Writer 
