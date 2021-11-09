@@ -61,11 +61,11 @@ FROM "public".title_principals;
 
 --Title_version
 INSERT INTO public.Title_versions ("title_id", "title_version", "title_name", "region","language", "types", "attributes", "is_original_title") 
-SELECT DISTINCT on ("titleid", "ordering") title, region, "language", types, attributes, is_original_title
+SELECT DISTINCT on ("titleid", "ordering") title, region, "language", types, attributes, isoriginaltitle
 FROM "public".title_akas;
 
 --Writer 
-INSERT INTO public.writer(title_id, writer_id)
+INSERT INTO public.Writer_temp(title_id, writer_id)
 SELECT 
 	DISTINCT on (tconst, unnest(string_to_array(writers, ',')))
 		tconst, unnest(string_to_array(writers, ','))
@@ -74,7 +74,7 @@ ALTER TABLE "public".Writer_temp
 RENAME TO Writer;
 
 --Director
-INSERT INTO public.director(title_id, director_id)
+INSERT INTO public.Director_temp(title_id, director_id)
 SELECT 
 	DISTINCT on (tconst, unnest(string_to_array(directors, ',')))
 		tconst, unnest(string_to_array(directors, ','))
