@@ -130,3 +130,9 @@ CREATE TABLE search_history(
     search_string VARCHAR(255),
     date VARCHAR(255)
     );
+
+CREATE TABLE Comment(
+    user_id VARCHAR(255),
+    title_id VARCHAR(255),
+    comment VARCHAR(1024)
+    );
