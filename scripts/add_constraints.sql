@@ -28,8 +28,8 @@ ALTER TABLE ONLY public.Profession
 
 ALTER TABLE ONLY public.Known_for_titles
     ADD CONSTRAINT known_for_titles_pkey PRIMARY KEY (person_id, title_id),
-    ADD CONSTRAINT known_for_titles_fk FOREIGN KEY(title_id) REFERENCES title(title_id),
-    ADD CONSTRAINT known_for_titles_p_fk FOREIGN KEY(person_id) REFERENCES Person(person_id);
+    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id),
+    ADD CONSTRAINT person_fk FOREIGN KEY(person_id) REFERENCES Person(person_id);
 
 ALTER TABLE ONLY public.Title_versions
     ADD CONSTRAINT Title_versions_pkey PRIMARY KEY (title_id,title_version);
