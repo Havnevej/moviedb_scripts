@@ -121,7 +121,7 @@ CREATE TABLE bookmark_title(
     );
 
 CREATE TABLE bookmark_person(
-    user_id VARCHAR(255)
+    user_id VARCHAR(255),
     person_id VARCHAR(255)
     );
 
