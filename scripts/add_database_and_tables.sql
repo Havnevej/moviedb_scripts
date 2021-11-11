@@ -104,9 +104,10 @@ CREATE TABLE person_rating (
     );
 
 CREATE TABLE public.user (
-    user_id VARCHAR(255),
+    email VARCHAR(255)
     user_name VARCHAR(255),
-    password VARCHAR(255)
+    password VARCHAR(255),
+    date_created varchar(255)
     );
 
 CREATE TABLE user_title_rating(
