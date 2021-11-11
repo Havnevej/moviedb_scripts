@@ -78,6 +78,19 @@ ALTER TABLE "public".Director_temp
 RENAME TO Director;
 
 --Known_for_titles
+CREATE TEMP TABLE IF NOT EXISTS temp_table(person_id VARCHAR, title_id VARCHAR);
+INSERT INTO temp_table (person_id, title_id)
+	SELECT nconst, unnest(string_to_array(knownfortitles, ',')) from name_basics;
+
+INSERT INTO "public".known_for_titles(person_id, title_id)
+	SELECT * FROM temp_table as tp
+		WHERE EXISTS (
+				SELECT *
+				FROM title
+				WHERE title_id = tp.title_id
+		);
+
+/*
 CREATE TABLE TEMP (person_id VARCHAR, title_id VARCHAR);
 INSERT INTO "public".TEMP (person_id, title_id)
 SELECT nconst, unnest(string_to_array(knownfortitles, ',')) from name_basics;
@@ -91,8 +104,7 @@ WHERE EXISTS (
 );
 
 DROP TABLE TEMP;
-
-
+*/
 
 
 /*
