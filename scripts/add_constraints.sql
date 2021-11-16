@@ -62,16 +62,16 @@ ALTER TABLE "public"."user"
     ADD CONSTRAINT "user_pkey" PRIMARY KEY ("username");
 
 ALTER TABLE ONLY public.User_title_rating
-    ADD CONSTRAINT user_title_rating_pkey PRIMARY KEY (user_id, title_id);
+    ADD CONSTRAINT user_title_rating_pkey PRIMARY KEY (username, title_id);
 
 ALTER TABLE ONLY public.Bookmark_title
-    ADD CONSTRAINT bookmark_title_pkey PRIMARY KEY (user_id, title_id);
+    ADD CONSTRAINT bookmark_title_pkey PRIMARY KEY (username, title_id);
 
 ALTER TABLE ONLY public.Bookmark_person
-    ADD CONSTRAINT bookmark_person_pkey PRIMARY KEY (user_id, person_id);
+    ADD CONSTRAINT bookmark_person_pkey PRIMARY KEY (username, person_id);
 
 ALTER TABLE ONLY public.Search_history
-    ADD CONSTRAINT search_history_pkey PRIMARY KEY (user_id, date);
+    ADD CONSTRAINT search_history_pkey PRIMARY KEY (username, date);
 
 ALTER TABLE ONLY public.Comment
-    ADD CONSTRAINT comment_pkey PRIMARY KEY (user_id, date);
+    ADD CONSTRAINT comment_pkey PRIMARY KEY (username, date);
