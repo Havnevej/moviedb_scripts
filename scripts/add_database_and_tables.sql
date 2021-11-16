@@ -103,37 +103,39 @@ CREATE TABLE person_rating (
     num_votes BIGINT
     );
 
-CREATE TABLE public.user (
-    email VARCHAR(255)
-    user_name VARCHAR(255),
-    password VARCHAR(255),
-    date_created varchar(255)
-    );
+DROP TABLE IF EXISTS "public"."user";
+CREATE TABLE "public"."user" (
+  "user_id" int8 NOT NULL,
+  "username" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "password" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "salt" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "created_date" date NOT NULL
+);
 
 CREATE TABLE user_title_rating(
-    user_id VARCHAR(255),
+    username VARCHAR(255),
     title_id VARCHAR(255),
     rating VARCHAR(255)
     );
 
 CREATE TABLE bookmark_title(
-    user_id VARCHAR(255),
+    username VARCHAR(255),
     title_id VARCHAR(255)
     );
 
 CREATE TABLE bookmark_person(
-    user_id VARCHAR(255),
+    username VARCHAR(255),
     person_id VARCHAR(255)
     );
 
 CREATE TABLE search_history(
-    user_id VARCHAR(255),
+    username VARCHAR(255),
     search_string VARCHAR(255),
     date VARCHAR(255)
     );
 
 CREATE TABLE Comment(
-    user_id VARCHAR(255),
+    username VARCHAR(255),
     date VARCHAR(255),
     title_id VARCHAR(255),
     comment VARCHAR(1024)
