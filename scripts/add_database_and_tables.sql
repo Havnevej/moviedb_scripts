@@ -106,8 +106,8 @@ CREATE TABLE person_rating (
 DROP TABLE IF EXISTS "public"."user";
 CREATE TABLE "public"."user" (
   "user_id" int8 NOT NULL,
-  "username" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
-  "password" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
+  "username" varchar(1024) COLLATE "pg_catalog"."default" NOT NULL,
+  "password" varchar(1024) COLLATE "pg_catalog"."default" NOT NULL,
   "salt" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "created_date" date NOT NULL
 );
