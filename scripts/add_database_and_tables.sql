@@ -132,7 +132,7 @@ CREATE TABLE bookmark_person(
 CREATE TABLE "public"."search_history" (
   "username" varchar(255) NOT NULL,
   "search_string" varchar(255),
-  "search_date" date NOT NULL
+  "search_date" timestamp NOT NULL
 );
 
 CREATE TABLE Comment(
