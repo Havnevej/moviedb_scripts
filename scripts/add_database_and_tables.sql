@@ -128,11 +128,12 @@ CREATE TABLE bookmark_person(
     person_id VARCHAR(255)
     );
 
-CREATE TABLE search_history(
-    username VARCHAR(255),
-    search_string VARCHAR(255),
-    date VARCHAR(255)
-    );
+
+CREATE TABLE "public"."search_history" (
+  "username" varchar(255) NOT NULL,
+  "search_string" varchar(255),
+  "search_date" date NOT NULL
+);
 
 CREATE TABLE Comment(
     username VARCHAR(255),
