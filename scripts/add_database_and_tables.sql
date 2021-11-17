@@ -108,7 +108,7 @@ CREATE TABLE "public"."user" (
   "user_id" int8 NOT NULL,
   "username" varchar(512) COLLATE "pg_catalog"."default" NOT NULL,
   "password" varchar(1024) COLLATE "pg_catalog"."default" NOT NULL,
-  "salt" varchar(1024 COLLATE "pg_catalog"."default" NOT NULL,
+  "salt" varchar(1024) COLLATE "pg_catalog"."default" NOT NULL,
   "created_date" date NOT NULL
 );
 
