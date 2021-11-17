@@ -77,6 +77,15 @@ FROM title_crew;
 ALTER TABLE "public".Director_temp
 RENAME TO Director;
 
+--User
+INSERT INTO "user"(user_id, username, "password", salt, created_date) values (1, 'JLP', 
+'mF6mRnm3eR/dju78eV3rGytsldfCWRLi8FpUUs2g2zQJKZNbkVWzkKkDSqvzbXA228Dz8DbJeu36Oqcmgw0jmFMeO3+t5VmMrUSz7daiZ7W1OAr7bJi9ZxQ99GfspgKtqXNBO6Ao2GGeCozrrTmXzjHrX4gXrTy8pJu3QpFdtIsgmHslXp9GyH0BJxJiJXiN1nWPBQP8b5oiodCsDk4F2O2hyVRXK7KGZ/Eov7h+U04vlhE87PsV7lLsy2r2arVZi4AJN64Fo2s9aOUiBIUZmOJmkdFfiVy4+uc1QogGM9IY04gblDro9rSKgFa7oIYQWmy30mP5Vg5/5/wrETtlsg==', 'XYrQRcopAN1ik9RarIitmmbLjQDoXaL6yewQzLjlTZG6Z36KrRwTYUTCLIUoSgu0Yg9H9n2Ilnzg03iTkQ5PiMgD/vS1fvSRiJDyVLCYfcVcFvh4b3aHdluoOCsQIkLbey6BHOifrCTz3wPkCA2g7XwVGYk+bTF1ne4xExH1QKMVdXCBK5FuT0D8ia1Ll8MU00LntUKPl/2XcCHz9/5uwr5ayYrwQGX4h3xxp7YpzudEv7fQ5ADAnMAKZsDs2UaCKxWdcY/9myKjgTvA93DYVtNCsinVf4Ih9kJ9mhiezcBkvb9FI06ipnh2mZnagDyQyh4ezwfHhWkxyknfUBWwoA==',
+'2021-11-17');
+
+--Search_history
+INSERT INTO "search_history"(username,search_string,search_date) VALUES ('JLP', 'parasite', '2021-11-17 14:07:35');
+
+
 --Known_for_titles
 CREATE TEMP TABLE IF NOT EXISTS temp_table(person_id VARCHAR, title_id VARCHAR);
 INSERT INTO temp_table (person_id, title_id)
