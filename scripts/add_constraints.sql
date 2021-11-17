@@ -41,19 +41,6 @@ ALTER TABLE ONLY public.omdb
 ALTER TABLE ONLY public.Genre
     ADD CONSTRAINT genre_pkey PRIMARY KEY (title_id, genre_name);
 
---Setting the foreignkeys
-ALTER TABLE ONLY public.Known_for_titles
-    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id),
-    ADD CONSTRAINT person_fk FOREIGN KEY(person_id) REFERENCES Person(person_id);
-
-ALTER TABLE ONLY public.Genre
-    ADD CONSTRAINT genre_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
-
-ALTER TABLE ONLY public.Title_rating
-    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
-
-
---Setting constraints for user (c framework)
 
 ALTER TABLE ONLY public.Person_rating
     ADD CONSTRAINT person_rating_pkey PRIMARY KEY (person_id);
@@ -75,3 +62,43 @@ ALTER TABLE ONLY "public"."search_history"
 
 ALTER TABLE ONLY public.Comment
     ADD CONSTRAINT comment_pkey PRIMARY KEY (username, date);
+
+
+
+
+
+
+
+--Setting the foreignkeys
+ALTER TABLE ONLY public.Known_for_titles
+    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id),
+    ADD CONSTRAINT person_fk FOREIGN KEY(person_id) REFERENCES Person(person_id);
+
+ALTER TABLE ONLY public.Genre
+    ADD CONSTRAINT genre_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
+
+ALTER TABLE ONLY public.Title_rating
+    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
+
+ALTER TABLE ONLY public.search_history
+    ADD CONSTRAINT username_fk FOREIGN KEY(username) REFERENCES "public"."user"(username);
+
+ALTER TABLE ONLY public.user_title_rating
+    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
+
+ALTER TABLE ONLY public.bookmark_title
+    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
+
+ALTER TABLE ONLY public.Comment
+    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id),
+    ADD CONSTRAINT username_fk FOREIGN KEY(username) REFERENCES "public"."user"(username);  
+   
+ALTER TABLE ONLY public.character_names_temp   
+    ADD CONSTRAINT person_fk FOREIGN KEY(person_id) REFERENCES person(person_id),
+    ADD CONSTRAINT title_fk FOREIGN KEY(title_id) REFERENCES title(title_id);
+
+    
+
+--Setting constraints for user (c framework)
+
+
