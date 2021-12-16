@@ -137,7 +137,7 @@ CREATE TABLE "public"."search_history" (
 
 CREATE TABLE Comment(
     username VARCHAR(255),
-    "date" timestamp NOT NULL,
+    date VARCHAR(255),
     title_id VARCHAR(255),
     comment VARCHAR(1024)
     );
