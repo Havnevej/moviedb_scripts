@@ -109,7 +109,8 @@ CREATE TABLE "public"."user" (
   "username" varchar(512) COLLATE "pg_catalog"."default" NOT NULL,
   "password" varchar(1024) COLLATE "pg_catalog"."default" NOT NULL,
   "salt" varchar(1024) COLLATE "pg_catalog"."default" NOT NULL,
-  "created_date" date NOT NULL
+  "created_date" date NOT NULL,
+  "is_admin" boolean
 );
 
 CREATE TABLE user_title_rating(
